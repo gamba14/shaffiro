@@ -1,0 +1,38 @@
+{
+    "generator-jhipster": {
+        "promptValues": {
+            "packageName": "com.shaffiro",
+            "nativeLanguage": "es"
+        },
+        "jhipsterVersion": "5.8.2",
+        "applicationType": "monolith",
+        "baseName": "shaffiro",
+        "packageName": "com.shaffiro",
+        "packageFolder": "com/shaffiro",
+        "serverPort": "8080",
+        "authenticationType": "jwt",
+        "cacheProvider": "ehcache",
+        "enableHibernateCache": true,
+        "websocket": false,
+        "databaseType": "sql",
+        "devDatabaseType": "h2Disk",
+        "prodDatabaseType": "mysql",
+        "searchEngine": false,
+        "messageBroker": false,
+        "serviceDiscoveryType": "eureka",
+        "buildTool": "maven",
+        "enableSwaggerCodegen": false,
+        "jwtSecretKey": "N2JkNmU0MTk3NzIxNDliZmVhNWQ2NWE3MWRkZTNlN2E1NTJmMzY2Y2M5NGIwZDYyZGI0ZGUyYTM2MTUzNDc0Y2ViZTE1ZGUxMzAyNGE1Y2NkZWQzNDhmMjdhZTMxODQ5NWJmYTUzMGIwZTI4MWQzZWVmOWE1NjlkNTdhYzNjNGU=",
+        "clientFramework": "angularX",
+        "useSass": true,
+        "clientPackageManager": "npm",
+        "testFrameworks": [],
+        "jhiPrefix": "jhi",
+        "entitySuffix": "",
+        "dtoSuffix": "DTO",
+        "otherModules": [],
+        "enableTranslation": true,
+        "nativeLanguage": "es",
+        "languages": ["es"]
+    }
+}
