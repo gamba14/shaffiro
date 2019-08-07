@@ -428,6 +428,11 @@
 			<plugin>
 				<groupId>com.google.cloud.tools</groupId>
 				<artifactId>jib-maven-plugin</artifactId>
+				<configuration>
+  					<to>
+    					<image>docker.io/gamba14/shaffiro</image>
+  					</to>
+				</configuration>
 			</plugin>
 			<!-- jhipster-needle-maven-add-plugin -->
 		</plugins>
