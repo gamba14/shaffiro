@@ -11,7 +11,16 @@
 	<name>Shaffiro</name>
 
 	<repositories>
-		<!-- jhipster-needle-maven-repository -->
+        <repository>
+            <id>bintray</id>
+            <url>https://jcenter.bintray.com</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
 	</repositories>
 
 	<pluginRepositories>
@@ -77,21 +86,21 @@
 		<sonar.exclusions>src/main/webapp/content/**/*.*,
 			src/main/webapp/i18n/*.js, target/www/**/*.*</sonar.exclusions>
 		<sonar.issue.ignore.multicriteria>S3437,S4502,S4684,UndocumentedApi,BoldAndItalicTagsCheck</sonar.issue.ignore.multicriteria>
-		<!-- Rule https://sonarcloud.io/coding_rules?open=Web%3ABoldAndItalicTagsCheck&rule_key=Web%3ABoldAndItalicTagsCheck 
-			is ignored. Even if we agree that using the "i" tag is an awful practice, 
+		<!-- Rule https://sonarcloud.io/coding_rules?open=Web%3ABoldAndItalicTagsCheck&rule_key=Web%3ABoldAndItalicTagsCheck
+			is ignored. Even if we agree that using the "i" tag is an awful practice,
 			this is what is recommended by http://fontawesome.io/examples/ -->
 		<sonar.issue.ignore.multicriteria.BoldAndItalicTagsCheck.resourceKey>src/main/webapp/app/**/*.*</sonar.issue.ignore.multicriteria.BoldAndItalicTagsCheck.resourceKey>
 		<sonar.issue.ignore.multicriteria.BoldAndItalicTagsCheck.ruleKey>Web:BoldAndItalicTagsCheck</sonar.issue.ignore.multicriteria.BoldAndItalicTagsCheck.ruleKey>
-		<!-- Rule https://sonarcloud.io/coding_rules?open=squid%3AS3437&rule_key=squid%3AS3437 
+		<!-- Rule https://sonarcloud.io/coding_rules?open=squid%3AS3437&rule_key=squid%3AS3437
 			is ignored, as a JPA-managed field cannot be transient -->
 		<sonar.issue.ignore.multicriteria.S3437.resourceKey>src/main/java/**/*</sonar.issue.ignore.multicriteria.S3437.resourceKey>
 		<sonar.issue.ignore.multicriteria.S3437.ruleKey>squid:S3437</sonar.issue.ignore.multicriteria.S3437.ruleKey>
-		<!-- Rule https://sonarcloud.io/coding_rules?open=squid%3AUndocumentedApi&rule_key=squid%3AUndocumentedApi 
-			is ignored, as we want to follow "clean code" guidelines and classes, methods 
+		<!-- Rule https://sonarcloud.io/coding_rules?open=squid%3AUndocumentedApi&rule_key=squid%3AUndocumentedApi
+			is ignored, as we want to follow "clean code" guidelines and classes, methods
 			and arguments names should be self-explanatory -->
 		<sonar.issue.ignore.multicriteria.UndocumentedApi.resourceKey>src/main/java/**/*</sonar.issue.ignore.multicriteria.UndocumentedApi.resourceKey>
 		<sonar.issue.ignore.multicriteria.UndocumentedApi.ruleKey>squid:UndocumentedApi</sonar.issue.ignore.multicriteria.UndocumentedApi.ruleKey>
-		<!-- Rule https://sonarcloud.io/coding_rules?open=squid%3AS4502&rule_key=squid%3AS4502 
+		<!-- Rule https://sonarcloud.io/coding_rules?open=squid%3AS4502&rule_key=squid%3AS4502
 			is ignored, as for JWT tokens we are not subject to CSRF attack -->
 		<sonar.issue.ignore.multicriteria.S4502.resourceKey>src/main/java/**/*</sonar.issue.ignore.multicriteria.S4502.resourceKey>
 		<sonar.issue.ignore.multicriteria.S4502.ruleKey>squid:S4502</sonar.issue.ignore.multicriteria.S4502.ruleKey>
@@ -345,11 +354,22 @@
 			<artifactId>spring-boot-starter-undertow</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.social</groupId>
-			<artifactId>spring-social-core</artifactId>
-			<version>1.1.6.RELEASE</version>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.social</groupId>-->
+<!--			<artifactId>spring-social-core</artifactId>-->
+<!--			<version>1.1.6.RELEASE</version>-->
+<!--		</dependency>-->
+         <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-mqtt</artifactId>
+            <version>3.8.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.10</version>
+            <scope>provided</scope>
+        </dependency>
 	</dependencies>
 
 	<build>
@@ -418,10 +438,11 @@
 					</execution>
 				</executions>
 				<configuration>
-					<mainClass>${start-class}</mainClass>
+					<!--suppress UnresolvedMavenProperty -->
+                    <mainClass>${start-class}</mainClass>
 					<executable>true</executable>
 					<fork>true</fork>
-					<!-- Enable the line below to have remote debugging of your application 
+					<!-- Enable the line below to have remote debugging of your application
 						on port 5005 <jvmArguments>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005</jvmArguments> -->
 				</configuration>
 			</plugin>
@@ -484,7 +505,7 @@
 								<destFile>${project.testresult.directory}/coverage/jacoco/jacoco.exec</destFile>
 							</configuration>
 						</execution>
-						<!-- Ensures that the code coverage report for unit tests is created 
+						<!-- Ensures that the code coverage report for unit tests is created
 							after unit tests have been run -->
 						<execution>
 							<id>post-unit-test</id>
@@ -676,7 +697,7 @@
 					<configuration>
 						<!-- Force alphabetical order to have a reproducible build -->
 						<runOrder>alphabetical</runOrder>
-						<!-- Fixes a bug which will be solved in next version after 2.22.1 
+						<!-- Fixes a bug which will be solved in next version after 2.22.1
 							then this can be removed -->
 						<!-- see: https://issues.apache.org/jira/browse/SUREFIRE-1588 -->
 						<useSystemClassLoader>false</useSystemClassLoader>
@@ -983,11 +1004,11 @@
 			</properties>
 		</profile>
 		<profile>
-			<!-- Profile for doing "continuous compilation" with the Scala Maven plugin. 
-				It allows automatic compilation of Java classes as soon as they are saved. 
-				To use it, run in 3 terminals: - './mvnw -Pcc scala:cc' for continuous compilation 
-				of your classes - './mvnw -Pcc -Pdev' for hot reload of Spring boot - 'npm 
-				start/yarn start' for hot reload of the HTML/JavaScript asset Everything 
+			<!-- Profile for doing "continuous compilation" with the Scala Maven plugin.
+				It allows automatic compilation of Java classes as soon as they are saved.
+				To use it, run in 3 terminals: - './mvnw -Pcc scala:cc' for continuous compilation
+				of your classes - './mvnw -Pcc -Pdev' for hot reload of Spring boot - 'npm
+				start/yarn start' for hot reload of the HTML/JavaScript asset Everything
 				should hot reload automatically! -->
 			<id>cc</id>
 			<dependencies>
@@ -1019,7 +1040,7 @@
 							<executable>true</executable>
 							<fork>true</fork>
 							<addResources>true</addResources>
-							<!-- Enable the line below to have remote debugging of your application 
+							<!-- Enable the line below to have remote debugging of your application
 								on port 5005 <jvmArguments>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005</jvmArguments> -->
 						</configuration>
 					</plugin>
@@ -1059,8 +1080,8 @@
 			</dependencies>
 		</profile>
 		<profile>
-			<!-- Profile for applying IDE-specific configuration. At the moment it 
-				configures MapStruct and Hibernate JPA Metamodel Generator, which you need 
+			<!-- Profile for applying IDE-specific configuration. At the moment it
+				configures MapStruct and Hibernate JPA Metamodel Generator, which you need
 				when working with DTOs and entity filtering. -->
 			<id>IDE</id>
 			<dependencies>
@@ -1085,8 +1106,8 @@
 			<build>
 				<pluginManagement>
 					<plugins>
-						<!-- This plugin's configuration is used to store Eclipse m2e settings 
-							only. It has no influence on the Maven build itself. Remove when the m2e 
+						<!-- This plugin's configuration is used to store Eclipse m2e settings
+							only. It has no influence on the Maven build itself. Remove when the m2e
 							plugin can correctly bind to Maven lifecycle -->
 						<plugin>
 							<groupId>org.eclipse.m2e</groupId>

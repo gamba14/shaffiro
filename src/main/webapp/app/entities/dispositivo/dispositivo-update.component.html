@@ -1,0 +1,51 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-dispositivo-heading" jhiTranslate="shaffiroApp.dispositivo.home.createOrEditLabel">Create or edit a Dispositivo</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!dispositivo.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="dispositivo.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="shaffiroApp.dispositivo.nombre" for="field_nombre">Nombre</label>
+                    <input type="text" class="form-control" name="nombre" id="field_nombre"
+                        [(ngModel)]="dispositivo.nombre" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="shaffiroApp.dispositivo.tipo" for="field_tipo">Tipo</label>
+                    <select class="form-control" name="tipo" [(ngModel)]="dispositivo.tipo" id="field_tipo" >
+                        <option value="SENSOR">{{'shaffiroApp.TipoDispositivo.SENSOR' | translate}}</option>
+                        <option value="ACTUADOR">{{'shaffiroApp.TipoDispositivo.ACTUADOR' | translate}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="shaffiroApp.dispositivo.activo" for="field_activo">Activo</label>
+                    <input type="checkbox" class="form-control" name="activo" id="field_activo"
+                        [(ngModel)]="dispositivo.activo" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="shaffiroApp.dispositivo.configuracion" for="field_configuracion">Configuracion</label>
+                    <input type="text" class="form-control" name="configuracion" id="field_configuracion"
+                        [(ngModel)]="dispositivo.configuracion" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="shaffiroApp.dispositivo.regla" for="field_regla">Regla</label>
+                    <input type="text" class="form-control" name="regla" id="field_regla"
+                        [(ngModel)]="dispositivo.regla" />
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

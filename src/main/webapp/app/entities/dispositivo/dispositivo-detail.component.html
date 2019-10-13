@@ -1,0 +1,43 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="dispositivo">
+            <h2><span jhiTranslate="shaffiroApp.dispositivo.detail.title">Dispositivo</span> {{dispositivo.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="shaffiroApp.dispositivo.nombre">Nombre</span></dt>
+                <dd>
+                    <span>{{dispositivo.nombre}}</span>
+                </dd>
+                <dt><span jhiTranslate="shaffiroApp.dispositivo.tipo">Tipo</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'shaffiroApp.TipoDispositivo.' + dispositivo.tipo}}">{{dispositivo.tipo}}</span>
+                </dd>
+                <dt><span jhiTranslate="shaffiroApp.dispositivo.activo">Activo</span></dt>
+                <dd>
+                    <span>{{dispositivo.activo}}</span>
+                </dd>
+                <dt><span jhiTranslate="shaffiroApp.dispositivo.configuracion">Configuracion</span></dt>
+                <dd>
+                    <span>{{dispositivo.configuracion}}</span>
+                </dd>
+                <dt><span jhiTranslate="shaffiroApp.dispositivo.regla">Regla</span></dt>
+                <dd>
+                    <span>{{dispositivo.regla}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/dispositivo', dispositivo.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

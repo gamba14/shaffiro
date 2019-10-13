@@ -1,0 +1,9 @@
+{
+    "shaffiroApp": {
+        "TipoDispositivo": {
+            "null": "",
+            "SENSOR": "SENSOR",
+            "ACTUADOR": "ACTUADOR"
+        }
+    }
+}
