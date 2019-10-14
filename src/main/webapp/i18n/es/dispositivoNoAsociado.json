@@ -1,0 +1,22 @@
+{
+    "shaffiroApp": {
+        "dispositivoNoAsociado": {
+            "home": {
+                "title": "Dispositivo No Asociados",
+                "createLabel": "Crear nuevo Dispositivo No Asociado",
+                "createOrEditLabel": "Crear o editar Dispositivo No Asociado"
+            },
+            "created": "Un nuevo Dispositivo No Asociado ha sido creado con el identificador {{ param }}",
+            "updated": "Un Dispositivo No Asociado ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Dispositivo No Asociado ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Dispositivo No Asociado {{ id }}?"
+            },
+            "detail": {
+                "title": "Dispositivo No Asociado"
+            },
+            "mac": "Mac",
+            "uuid": "Uuid"
+        }
+    }
+}
