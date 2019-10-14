@@ -4,6 +4,7 @@ import com.shaffiro.ShaffiroApp;
 
 import com.shaffiro.domain.Dispositivo;
 import com.shaffiro.repository.DispositivoRepository;
+import com.shaffiro.service.DiscoveryService;
 import com.shaffiro.service.DispositivoService;
 import com.shaffiro.service.dto.DispositivoDTO;
 import com.shaffiro.service.mapper.DispositivoMapper;
@@ -69,6 +70,9 @@ public class DispositivoResourceIntTest {
     private DispositivoService dispositivoService;
 
     @Autowired
+    private DiscoveryService discoveryService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -90,7 +94,7 @@ public class DispositivoResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final DispositivoResource dispositivoResource = new DispositivoResource(dispositivoService);
+        final DispositivoResource dispositivoResource = new DispositivoResource(dispositivoService, discoveryService);
         this.restDispositivoMockMvc = MockMvcBuilders.standaloneSetup(dispositivoResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -180,7 +184,7 @@ public class DispositivoResourceIntTest {
             .andExpect(jsonPath("$.[*].configuracion").value(hasItem(DEFAULT_CONFIGURACION.toString())))
             .andExpect(jsonPath("$.[*].regla").value(hasItem(DEFAULT_REGLA.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getDispositivo() throws Exception {

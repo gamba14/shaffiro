@@ -8,6 +8,7 @@
             "entities": {
                 "main": "Entidades",
                 "dispositivo": "Dispositivo",
+                "dispositivoNoAsociado": "Dispositivo No Asociado",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
