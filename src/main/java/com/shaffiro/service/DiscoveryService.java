@@ -7,6 +7,8 @@ import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.buffer.Buffer;
+import io.vertx.core.datagram.DatagramPacket;
+import io.vertx.core.datagram.DatagramSocket;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.core.json.Json;
@@ -54,6 +56,25 @@ public class DiscoveryService {
             this.sendError(500, response);
         }
         response.end();
+    }
+
+    public void handleUDP(DatagramPacket socket){
+        String request = new String(socket.data().getBytes());
+        log.debug("Recibo del socket: " + request);
+        JsonObject body = new JsonObject(request);
+        log.debug(body.toString());
+        DispositivoNoAsociadoDTO dispositivoNoAsociado = new DispositivoNoAsociadoDTO();
+        dispositivoNoAsociado.setMac(body.getJsonObject("dispositivo").getString("mac"));
+        String ip = socket.sender().host();
+        log.debug("IP: " +ip);
+        //dispositivoNoAsociado.setUuid(body.getJsonObject("dispositivo").getString("uuid"));
+        dispositivoNoAsociado.setUuid(ip);
+        try{
+            dispositivoNoAsociadoService.save(dispositivoNoAsociado);
+        }catch (Exception ex){
+            ex.printStackTrace();
+            log.error("Error al guardar dto");
+        }
     }
 
     private void sendError(int statusCode, HttpServerResponse response) {
