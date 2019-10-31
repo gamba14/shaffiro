@@ -1,0 +1,29 @@
+{
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "nombre",
+            "fieldType": "String",
+            "fieldValidateRules": []
+        },
+        {
+            "fieldName": "logica",
+            "fieldType": "String",
+            "fieldValidateRules": []
+        },
+        {
+            "fieldName": "dispositivosAsociados",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20191031223258",
+    "dto": "mapstruct",
+    "searchEngine": false,
+    "service": "serviceClass",
+    "entityTableName": "regla",
+    "databaseType": "sql",
+    "jpaMetamodelFiltering": true,
+    "pagination": "no"
+}

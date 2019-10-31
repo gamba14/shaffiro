@@ -117,7 +117,7 @@ public class DispositivoNoAsociadoResource {
     }
 
     @PostMapping("/pair/{mac}")
-    public ResponseEntity<Void> pairDevice(@PathVariable String mac,@RequestBody String config){
+    public ResponseEntity<Void> pairDevice(@PathVariable String mac, @RequestBody String config){
         Vertx vertx = Vertx.vertx();
         DatagramSocket socket = vertx.createDatagramSocket();
         log.debug("Pairing device with MAC: " + mac);

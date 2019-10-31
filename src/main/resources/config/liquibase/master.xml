@@ -7,6 +7,7 @@
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20191008134740_added_entity_Dispositivo.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20191014015443_added_entity_DispositivoNoAsociado.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191031223258_added_entity_Regla.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

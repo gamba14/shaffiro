@@ -1,0 +1,23 @@
+{
+    "shaffiroApp": {
+        "regla": {
+            "home": {
+                "title": "Reglas",
+                "createLabel": "Crear nuevo Regla",
+                "createOrEditLabel": "Crear o editar Regla"
+            },
+            "created": "Un nuevo Regla ha sido creado con el identificador {{ param }}",
+            "updated": "Un Regla ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Regla ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Regla {{ id }}?"
+            },
+            "detail": {
+                "title": "Regla"
+            },
+            "nombre": "Nombre",
+            "logica": "Logica",
+            "dispositivosAsociados": "Dispositivos Asociados"
+        }
+    }
+}
