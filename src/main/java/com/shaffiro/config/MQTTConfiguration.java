@@ -31,6 +31,10 @@ public class MQTTConfiguration {
 
             log.debug("[keep alive timeout = " + endpoint.keepAliveTimeSeconds() + "]");
 
+            endpoint.publishHandler(mqttPublishMessage ->
+
+                log.debug("Just received message " + mqttPublishMessage.payload().toString()+" ] with QoS ["+ mqttPublishMessage.qosLevel().toString() + "]")
+            );
             // accept connection from the remote client
             endpoint.accept(false);
 
