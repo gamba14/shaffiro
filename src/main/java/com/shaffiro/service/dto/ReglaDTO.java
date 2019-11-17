@@ -13,8 +13,6 @@ public class ReglaDTO implements Serializable {
 
     private String logica;
 
-    private String dispositivosAsociados;
-
 
     public Long getId() {
         return id;
@@ -38,14 +36,6 @@ public class ReglaDTO implements Serializable {
 
     public void setLogica(String logica) {
         this.logica = logica;
-    }
-
-    public String getDispositivosAsociados() {
-        return dispositivosAsociados;
-    }
-
-    public void setDispositivosAsociados(String dispositivosAsociados) {
-        this.dispositivosAsociados = dispositivosAsociados;
     }
 
     @Override
@@ -75,7 +65,6 @@ public class ReglaDTO implements Serializable {
             "id=" + getId() +
             ", nombre='" + getNombre() + "'" +
             ", logica='" + getLogica() + "'" +
-            ", dispositivosAsociados='" + getDispositivosAsociados() + "'" +
             "}";
     }
 }

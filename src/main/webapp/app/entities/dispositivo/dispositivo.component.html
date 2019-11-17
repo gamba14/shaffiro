@@ -30,7 +30,11 @@
                 <td jhiTranslate="{{'shaffiroApp.TipoDispositivo.' + dispositivo.tipo}}">{{dispositivo.tipo}}</td>
                 <td>{{dispositivo.activo}}</td>
                 <td>{{dispositivo.configuracion}}</td>
-                <td>{{dispositivo.regla}}</td>
+                <td>
+                    <div *ngIf="dispositivo.reglaId">
+                        <a [routerLink]="['../regla', dispositivo.reglaId , 'view' ]" >{{dispositivo.reglaId}}</a>
+                    </div>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

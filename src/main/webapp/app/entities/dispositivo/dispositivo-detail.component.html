@@ -23,7 +23,9 @@
                 </dd>
                 <dt><span jhiTranslate="shaffiroApp.dispositivo.regla">Regla</span></dt>
                 <dd>
-                    <span>{{dispositivo.regla}}</span>
+                    <div *ngIf="dispositivo.reglaId">
+                        <a [routerLink]="['/regla', dispositivo.reglaId, 'view']">{{dispositivo.reglaId}}</a>
+                    </div>
                 </dd>
             </dl>
 

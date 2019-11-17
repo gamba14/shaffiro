@@ -1,7 +1,16 @@
 {
     "fluentMethods": true,
     "clientRootFolder": "",
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipName": "regla",
+            "otherEntityName": "regla",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id",
+            "otherEntityRelationshipName": "dispositivo",
+            "otherEntityRelationshipNameUndefined": true
+        }
+    ],
     "fields": [
         {
             "fieldName": "nombre",
@@ -23,10 +32,6 @@
             "fieldName": "configuracion",
             "fieldType": "String",
             "fieldValidateRules": []
-        },
-        {
-            "fieldName": "regla",
-            "fieldType": "String"
         }
     ],
     "changelogDate": "20191008134740",

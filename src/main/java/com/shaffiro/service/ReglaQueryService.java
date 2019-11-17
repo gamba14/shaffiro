@@ -95,8 +95,9 @@ public class ReglaQueryService extends QueryService<Regla> {
             if (criteria.getLogica() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getLogica(), Regla_.logica));
             }
-            if (criteria.getDispositivosAsociados() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getDispositivosAsociados(), Regla_.dispositivosAsociados));
+            if (criteria.getDispositivoId() != null) {
+                specification = specification.and(buildSpecification(criteria.getDispositivoId(),
+                    root -> root.join(Regla_.dispositivos, JoinType.LEFT).get(Dispositivo_.id)));
             }
         }
         return specification;

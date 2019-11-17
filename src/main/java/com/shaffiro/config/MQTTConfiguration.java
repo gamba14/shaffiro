@@ -1,9 +1,11 @@
 package com.shaffiro.config;
 
+import com.shaffiro.service.MQTTBrokerService;
 import io.vertx.core.Vertx;
 import io.vertx.mqtt.MqttServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,10 +15,24 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class MQTTConfiguration {
     private static final Logger log = LoggerFactory.getLogger(MQTTConfiguration.class);
+    @Autowired
+    private MQTTBrokerService mqttBrokerService;
+
     @Bean
     public MqttServer mqttServer(){
         MqttServer mqttServer = MqttServer.create(Vertx.vertx());
-        mqttServer.endpointHandler(endpoint -> {
+        mqttServer.endpointHandler(mqttBrokerService::handler).listen(ar -> {
+
+            if (ar.succeeded()) {
+
+                log.debug("MQTT server is listening on port " + ar.result().actualPort());
+            } else {
+
+                log.debug("Error on starting the server");
+                ar.cause().printStackTrace();
+            }
+        });
+       /* mqttServer.endpointHandler(endpoint -> {
 
             // shows main connect info
             log.debug("MQTT client [" + endpoint.clientIdentifier() + "] request to connect, clean session = " + endpoint.isCleanSession());
@@ -38,18 +54,8 @@ public class MQTTConfiguration {
             // accept connection from the remote client
             endpoint.accept(false);
 
-        })
-            .listen(ar -> {
+        })*/
 
-                if (ar.succeeded()) {
-
-                    log.debug("MQTT server is listening on port " + ar.result().actualPort());
-                } else {
-
-                    log.debug("Error on starting the server");
-                    ar.cause().printStackTrace();
-                }
-            });
         return mqttServer;
     }
 }

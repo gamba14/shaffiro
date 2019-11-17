@@ -17,7 +17,7 @@
             },
             "nombre": "Nombre",
             "logica": "Logica",
-            "dispositivosAsociados": "Dispositivos Asociados"
+            "dispositivo": "Dispositivo"
         }
     }
 }

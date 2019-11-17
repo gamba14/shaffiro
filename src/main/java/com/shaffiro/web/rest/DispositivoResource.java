@@ -1,5 +1,4 @@
 package com.shaffiro.web.rest;
-import com.shaffiro.service.DiscoveryService;
 import com.shaffiro.service.DispositivoService;
 import com.shaffiro.web.rest.errors.BadRequestAlertException;
 import com.shaffiro.web.rest.util.HeaderUtil;
@@ -29,11 +28,8 @@ public class DispositivoResource {
 
     private final DispositivoService dispositivoService;
 
-    private final DiscoveryService discoveryService;
-
-    public DispositivoResource(DispositivoService dispositivoService, DiscoveryService discoveryService) {
+    public DispositivoResource(DispositivoService dispositivoService) {
         this.dispositivoService = dispositivoService;
-        this.discoveryService = discoveryService;
     }
 
     /**
@@ -112,5 +108,4 @@ public class DispositivoResource {
         dispositivoService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
-
 }

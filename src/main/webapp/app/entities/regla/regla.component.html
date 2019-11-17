@@ -17,7 +17,6 @@
             <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="shaffiroApp.regla.nombre">Nombre</span></th>
             <th><span jhiTranslate="shaffiroApp.regla.logica">Logica</span></th>
-            <th><span jhiTranslate="shaffiroApp.regla.dispositivosAsociados">Dispositivos Asociados</span></th>
             <th></th>
             </tr>
             </thead>
@@ -26,7 +25,6 @@
                 <td><a [routerLink]="['/regla', regla.id, 'view' ]">{{regla.id}}</a></td>
                 <td>{{regla.nombre}}</td>
                 <td>{{regla.logica}}</td>
-                <td>{{regla.dispositivosAsociados}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

@@ -4,7 +4,6 @@ import com.shaffiro.ShaffiroApp;
 
 import com.shaffiro.domain.Dispositivo;
 import com.shaffiro.repository.DispositivoRepository;
-import com.shaffiro.service.DiscoveryService;
 import com.shaffiro.service.DispositivoService;
 import com.shaffiro.service.dto.DispositivoDTO;
 import com.shaffiro.service.mapper.DispositivoMapper;
@@ -57,9 +56,6 @@ public class DispositivoResourceIntTest {
     private static final String DEFAULT_CONFIGURACION = "AAAAAAAAAA";
     private static final String UPDATED_CONFIGURACION = "BBBBBBBBBB";
 
-    private static final String DEFAULT_REGLA = "AAAAAAAAAA";
-    private static final String UPDATED_REGLA = "BBBBBBBBBB";
-
     @Autowired
     private DispositivoRepository dispositivoRepository;
 
@@ -68,9 +64,6 @@ public class DispositivoResourceIntTest {
 
     @Autowired
     private DispositivoService dispositivoService;
-
-    @Autowired
-    private DiscoveryService discoveryService;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -94,7 +87,7 @@ public class DispositivoResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final DispositivoResource dispositivoResource = new DispositivoResource(dispositivoService, discoveryService);
+        final DispositivoResource dispositivoResource = new DispositivoResource(dispositivoService);
         this.restDispositivoMockMvc = MockMvcBuilders.standaloneSetup(dispositivoResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -114,8 +107,7 @@ public class DispositivoResourceIntTest {
             .nombre(DEFAULT_NOMBRE)
             .tipo(DEFAULT_TIPO)
             .activo(DEFAULT_ACTIVO)
-            .configuracion(DEFAULT_CONFIGURACION)
-            .regla(DEFAULT_REGLA);
+            .configuracion(DEFAULT_CONFIGURACION);
         return dispositivo;
     }
 
@@ -144,7 +136,6 @@ public class DispositivoResourceIntTest {
         assertThat(testDispositivo.getTipo()).isEqualTo(DEFAULT_TIPO);
         assertThat(testDispositivo.isActivo()).isEqualTo(DEFAULT_ACTIVO);
         assertThat(testDispositivo.getConfiguracion()).isEqualTo(DEFAULT_CONFIGURACION);
-        assertThat(testDispositivo.getRegla()).isEqualTo(DEFAULT_REGLA);
     }
 
     @Test
@@ -181,10 +172,9 @@ public class DispositivoResourceIntTest {
             .andExpect(jsonPath("$.[*].nombre").value(hasItem(DEFAULT_NOMBRE.toString())))
             .andExpect(jsonPath("$.[*].tipo").value(hasItem(DEFAULT_TIPO.toString())))
             .andExpect(jsonPath("$.[*].activo").value(hasItem(DEFAULT_ACTIVO.booleanValue())))
-            .andExpect(jsonPath("$.[*].configuracion").value(hasItem(DEFAULT_CONFIGURACION.toString())))
-            .andExpect(jsonPath("$.[*].regla").value(hasItem(DEFAULT_REGLA.toString())));
+            .andExpect(jsonPath("$.[*].configuracion").value(hasItem(DEFAULT_CONFIGURACION.toString())));
     }
-
+    
     @Test
     @Transactional
     public void getDispositivo() throws Exception {
@@ -199,8 +189,7 @@ public class DispositivoResourceIntTest {
             .andExpect(jsonPath("$.nombre").value(DEFAULT_NOMBRE.toString()))
             .andExpect(jsonPath("$.tipo").value(DEFAULT_TIPO.toString()))
             .andExpect(jsonPath("$.activo").value(DEFAULT_ACTIVO.booleanValue()))
-            .andExpect(jsonPath("$.configuracion").value(DEFAULT_CONFIGURACION.toString()))
-            .andExpect(jsonPath("$.regla").value(DEFAULT_REGLA.toString()));
+            .andExpect(jsonPath("$.configuracion").value(DEFAULT_CONFIGURACION.toString()));
     }
 
     @Test
@@ -227,8 +216,7 @@ public class DispositivoResourceIntTest {
             .nombre(UPDATED_NOMBRE)
             .tipo(UPDATED_TIPO)
             .activo(UPDATED_ACTIVO)
-            .configuracion(UPDATED_CONFIGURACION)
-            .regla(UPDATED_REGLA);
+            .configuracion(UPDATED_CONFIGURACION);
         DispositivoDTO dispositivoDTO = dispositivoMapper.toDto(updatedDispositivo);
 
         restDispositivoMockMvc.perform(put("/api/dispositivos")
@@ -244,7 +232,6 @@ public class DispositivoResourceIntTest {
         assertThat(testDispositivo.getTipo()).isEqualTo(UPDATED_TIPO);
         assertThat(testDispositivo.isActivo()).isEqualTo(UPDATED_ACTIVO);
         assertThat(testDispositivo.getConfiguracion()).isEqualTo(UPDATED_CONFIGURACION);
-        assertThat(testDispositivo.getRegla()).isEqualTo(UPDATED_REGLA);
     }
 
     @Test

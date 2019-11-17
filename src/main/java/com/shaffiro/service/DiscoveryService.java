@@ -1,33 +1,18 @@
 package com.shaffiro.service;
 
-import com.shaffiro.domain.DispositivoNoAsociado;
 import com.shaffiro.service.dto.DispositivoNoAsociadoDTO;
-import com.sun.net.httpserver.HttpServer;
-import io.vertx.core.AbstractVerticle;
-import io.vertx.core.Handler;
-import io.vertx.core.Vertx;
-import io.vertx.core.buffer.Buffer;
 import io.vertx.core.datagram.DatagramPacket;
-import io.vertx.core.datagram.DatagramSocket;
-import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.http.HttpServerResponse;
-import io.vertx.core.json.Json;
 import io.vertx.core.json.JsonObject;
-import io.vertx.core.net.NetServer;
-import io.vertx.core.net.NetSocket;
 import io.vertx.ext.web.RoutingContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.HttpRequestHandler;
 
 import javax.annotation.PostConstruct;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -40,6 +25,8 @@ public class DiscoveryService {
     @Autowired
     private DispositivoNoAsociadoService dispositivoNoAsociadoService;
 
+    private List<DispositivoNoAsociadoDTO> dispositivoNoAsociadoList;
+
     public void handle(RoutingContext routingContext){
         Map<String, JsonObject> request = new HashMap<>();
         JsonObject body = routingContext.getBodyAsJson();
@@ -48,11 +35,15 @@ public class DiscoveryService {
         DispositivoNoAsociadoDTO dispositivoNoAsociado = new DispositivoNoAsociadoDTO();
         dispositivoNoAsociado.setMac(body.getJsonObject("dispositivo").getString("mac"));
         dispositivoNoAsociado.setUuid(body.getJsonObject("dispositivo").getString("uuid"));
+        boolean exists = dispositivoNoAsociadoList.stream().anyMatch(disp -> disp.getMac().equals(body.getJsonObject("dispositivo").getString("mac")));
         try{
-            dispositivoNoAsociadoService.save(dispositivoNoAsociado);
+            if(!exists) {
+                dispositivoNoAsociadoService.save(dispositivoNoAsociado);
+                this.getDispList();
+            }
         }catch (Exception ex){
-            ex.printStackTrace();
-            log.error("Error al guardar dto");
+//            ex.printStackTrace();
+//            log.error("Error al guardar dto");
             this.sendError(500, response);
         }
         response.end();
@@ -65,6 +56,7 @@ public class DiscoveryService {
         log.debug(body.toString());
         DispositivoNoAsociadoDTO dispositivoNoAsociado = new DispositivoNoAsociadoDTO();
         dispositivoNoAsociado.setMac(body.getJsonObject("dispositivo").getString("mac"));
+        dispositivoNoAsociado.setUuid(body.getJsonObject("dispositivo").getString("uuid"));
         String ip = socket.sender().host();
         log.debug("IP: " +ip);
         //dispositivoNoAsociado.setUuid(body.getJsonObject("dispositivo").getString("uuid"));
@@ -79,6 +71,12 @@ public class DiscoveryService {
 
     private void sendError(int statusCode, HttpServerResponse response) {
         response.setStatusCode(statusCode).end();
+    }
+
+    @PostConstruct
+    private void getDispList(){
+        dispositivoNoAsociadoList = dispositivoNoAsociadoService.findAll();
+        log.debug(dispositivoNoAsociadoList.toString());
     }
 
 }

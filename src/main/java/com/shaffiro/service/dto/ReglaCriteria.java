@@ -28,7 +28,7 @@ public class ReglaCriteria implements Serializable {
 
     private StringFilter logica;
 
-    private StringFilter dispositivosAsociados;
+    private LongFilter dispositivoId;
 
     public LongFilter getId() {
         return id;
@@ -54,12 +54,12 @@ public class ReglaCriteria implements Serializable {
         this.logica = logica;
     }
 
-    public StringFilter getDispositivosAsociados() {
-        return dispositivosAsociados;
+    public LongFilter getDispositivoId() {
+        return dispositivoId;
     }
 
-    public void setDispositivosAsociados(StringFilter dispositivosAsociados) {
-        this.dispositivosAsociados = dispositivosAsociados;
+    public void setDispositivoId(LongFilter dispositivoId) {
+        this.dispositivoId = dispositivoId;
     }
 
 
@@ -76,7 +76,7 @@ public class ReglaCriteria implements Serializable {
             Objects.equals(id, that.id) &&
             Objects.equals(nombre, that.nombre) &&
             Objects.equals(logica, that.logica) &&
-            Objects.equals(dispositivosAsociados, that.dispositivosAsociados);
+            Objects.equals(dispositivoId, that.dispositivoId);
     }
 
     @Override
@@ -85,7 +85,7 @@ public class ReglaCriteria implements Serializable {
         id,
         nombre,
         logica,
-        dispositivosAsociados
+        dispositivoId
         );
     }
 
@@ -95,7 +95,7 @@ public class ReglaCriteria implements Serializable {
                 (id != null ? "id=" + id + ", " : "") +
                 (nombre != null ? "nombre=" + nombre + ", " : "") +
                 (logica != null ? "logica=" + logica + ", " : "") +
-                (dispositivosAsociados != null ? "dispositivosAsociados=" + dispositivosAsociados + ", " : "") +
+                (dispositivoId != null ? "dispositivoId=" + dispositivoId + ", " : "") +
             "}";
     }
 

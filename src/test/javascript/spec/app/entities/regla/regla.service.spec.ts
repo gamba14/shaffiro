@@ -21,7 +21,7 @@ describe('Service Tests', () => {
             service = injector.get(ReglaService);
             httpMock = injector.get(HttpTestingController);
 
-            elemDefault = new Regla(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA');
+            elemDefault = new Regla(0, 'AAAAAAA', 'AAAAAAA');
         });
 
         describe('Service methods', async () => {
@@ -56,8 +56,7 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         nombre: 'BBBBBB',
-                        logica: 'BBBBBB',
-                        dispositivosAsociados: 'BBBBBB'
+                        logica: 'BBBBBB'
                     },
                     elemDefault
                 );
@@ -75,8 +74,7 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         nombre: 'BBBBBB',
-                        logica: 'BBBBBB',
-                        dispositivosAsociados: 'BBBBBB'
+                        logica: 'BBBBBB'
                     },
                     elemDefault
                 );

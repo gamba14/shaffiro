@@ -9,7 +9,7 @@ export interface IDispositivo {
     tipo?: TipoDispositivo;
     activo?: boolean;
     configuracion?: string;
-    regla?: string;
+    reglaId?: number;
 }
 
 export class Dispositivo implements IDispositivo {
@@ -19,7 +19,7 @@ export class Dispositivo implements IDispositivo {
         public tipo?: TipoDispositivo,
         public activo?: boolean,
         public configuracion?: string,
-        public regla?: string
+        public reglaId?: number
     ) {
         this.activo = this.activo || false;
     }

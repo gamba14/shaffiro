@@ -38,7 +38,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="regla" type="varchar(255)">
+            <column name="regla_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 

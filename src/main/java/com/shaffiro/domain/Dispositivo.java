@@ -1,6 +1,7 @@
 package com.shaffiro.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -38,8 +39,9 @@ public class Dispositivo implements Serializable {
     @Column(name = "configuracion")
     private String configuracion;
 
-    @Column(name = "regla")
-    private String regla;
+    @ManyToOne
+    @JsonIgnoreProperties("dispositivos")
+    private Regla regla;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -102,16 +104,16 @@ public class Dispositivo implements Serializable {
         this.configuracion = configuracion;
     }
 
-    public String getRegla() {
+    public Regla getRegla() {
         return regla;
     }
 
-    public Dispositivo regla(String regla) {
+    public Dispositivo regla(Regla regla) {
         this.regla = regla;
         return this;
     }
 
-    public void setRegla(String regla) {
+    public void setRegla(Regla regla) {
         this.regla = regla;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
@@ -144,7 +146,6 @@ public class Dispositivo implements Serializable {
             ", tipo='" + getTipo() + "'" +
             ", activo='" + isActivo() + "'" +
             ", configuracion='" + getConfiguracion() + "'" +
-            ", regla='" + getRegla() + "'" +
             "}";
     }
 }

@@ -1,12 +1,15 @@
 package com.shaffiro.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -29,9 +32,9 @@ public class Regla implements Serializable {
     @Column(name = "logica")
     private String logica;
 
-    @Column(name = "dispositivos_asociados")
-    private String dispositivosAsociados;
-
+    @OneToMany(mappedBy = "regla")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Dispositivo> dispositivos = new HashSet<>();
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -67,17 +70,29 @@ public class Regla implements Serializable {
         this.logica = logica;
     }
 
-    public String getDispositivosAsociados() {
-        return dispositivosAsociados;
+    public Set<Dispositivo> getDispositivos() {
+        return dispositivos;
     }
 
-    public Regla dispositivosAsociados(String dispositivosAsociados) {
-        this.dispositivosAsociados = dispositivosAsociados;
+    public Regla dispositivos(Set<Dispositivo> dispositivos) {
+        this.dispositivos = dispositivos;
         return this;
     }
 
-    public void setDispositivosAsociados(String dispositivosAsociados) {
-        this.dispositivosAsociados = dispositivosAsociados;
+    public Regla addDispositivo(Dispositivo dispositivo) {
+        this.dispositivos.add(dispositivo);
+        dispositivo.setRegla(this);
+        return this;
+    }
+
+    public Regla removeDispositivo(Dispositivo dispositivo) {
+        this.dispositivos.remove(dispositivo);
+        dispositivo.setRegla(null);
+        return this;
+    }
+
+    public void setDispositivos(Set<Dispositivo> dispositivos) {
+        this.dispositivos = dispositivos;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -107,7 +122,6 @@ public class Regla implements Serializable {
             "id=" + getId() +
             ", nombre='" + getNombre() + "'" +
             ", logica='" + getLogica() + "'" +
-            ", dispositivosAsociados='" + getDispositivosAsociados() + "'" +
             "}";
     }
 }

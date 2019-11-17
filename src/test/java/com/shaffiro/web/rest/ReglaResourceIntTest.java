@@ -3,6 +3,7 @@ package com.shaffiro.web.rest;
 import com.shaffiro.ShaffiroApp;
 
 import com.shaffiro.domain.Regla;
+import com.shaffiro.domain.Dispositivo;
 import com.shaffiro.repository.ReglaRepository;
 import com.shaffiro.service.ReglaService;
 import com.shaffiro.service.dto.ReglaDTO;
@@ -50,9 +51,6 @@ public class ReglaResourceIntTest {
 
     private static final String DEFAULT_LOGICA = "AAAAAAAAAA";
     private static final String UPDATED_LOGICA = "BBBBBBBBBB";
-
-    private static final String DEFAULT_DISPOSITIVOS_ASOCIADOS = "AAAAAAAAAA";
-    private static final String UPDATED_DISPOSITIVOS_ASOCIADOS = "BBBBBBBBBB";
 
     @Autowired
     private ReglaRepository reglaRepository;
@@ -106,8 +104,7 @@ public class ReglaResourceIntTest {
     public static Regla createEntity(EntityManager em) {
         Regla regla = new Regla()
             .nombre(DEFAULT_NOMBRE)
-            .logica(DEFAULT_LOGICA)
-            .dispositivosAsociados(DEFAULT_DISPOSITIVOS_ASOCIADOS);
+            .logica(DEFAULT_LOGICA);
         return regla;
     }
 
@@ -134,7 +131,6 @@ public class ReglaResourceIntTest {
         Regla testRegla = reglaList.get(reglaList.size() - 1);
         assertThat(testRegla.getNombre()).isEqualTo(DEFAULT_NOMBRE);
         assertThat(testRegla.getLogica()).isEqualTo(DEFAULT_LOGICA);
-        assertThat(testRegla.getDispositivosAsociados()).isEqualTo(DEFAULT_DISPOSITIVOS_ASOCIADOS);
     }
 
     @Test
@@ -169,8 +165,7 @@ public class ReglaResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(regla.getId().intValue())))
             .andExpect(jsonPath("$.[*].nombre").value(hasItem(DEFAULT_NOMBRE.toString())))
-            .andExpect(jsonPath("$.[*].logica").value(hasItem(DEFAULT_LOGICA.toString())))
-            .andExpect(jsonPath("$.[*].dispositivosAsociados").value(hasItem(DEFAULT_DISPOSITIVOS_ASOCIADOS.toString())));
+            .andExpect(jsonPath("$.[*].logica").value(hasItem(DEFAULT_LOGICA.toString())));
     }
     
     @Test
@@ -185,8 +180,7 @@ public class ReglaResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(regla.getId().intValue()))
             .andExpect(jsonPath("$.nombre").value(DEFAULT_NOMBRE.toString()))
-            .andExpect(jsonPath("$.logica").value(DEFAULT_LOGICA.toString()))
-            .andExpect(jsonPath("$.dispositivosAsociados").value(DEFAULT_DISPOSITIVOS_ASOCIADOS.toString()));
+            .andExpect(jsonPath("$.logica").value(DEFAULT_LOGICA.toString()));
     }
 
     @Test
@@ -269,42 +263,22 @@ public class ReglaResourceIntTest {
 
     @Test
     @Transactional
-    public void getAllReglasByDispositivosAsociadosIsEqualToSomething() throws Exception {
+    public void getAllReglasByDispositivoIsEqualToSomething() throws Exception {
         // Initialize the database
+        Dispositivo dispositivo = DispositivoResourceIntTest.createEntity(em);
+        em.persist(dispositivo);
+        em.flush();
+        regla.addDispositivo(dispositivo);
         reglaRepository.saveAndFlush(regla);
+        Long dispositivoId = dispositivo.getId();
 
-        // Get all the reglaList where dispositivosAsociados equals to DEFAULT_DISPOSITIVOS_ASOCIADOS
-        defaultReglaShouldBeFound("dispositivosAsociados.equals=" + DEFAULT_DISPOSITIVOS_ASOCIADOS);
+        // Get all the reglaList where dispositivo equals to dispositivoId
+        defaultReglaShouldBeFound("dispositivoId.equals=" + dispositivoId);
 
-        // Get all the reglaList where dispositivosAsociados equals to UPDATED_DISPOSITIVOS_ASOCIADOS
-        defaultReglaShouldNotBeFound("dispositivosAsociados.equals=" + UPDATED_DISPOSITIVOS_ASOCIADOS);
+        // Get all the reglaList where dispositivo equals to dispositivoId + 1
+        defaultReglaShouldNotBeFound("dispositivoId.equals=" + (dispositivoId + 1));
     }
 
-    @Test
-    @Transactional
-    public void getAllReglasByDispositivosAsociadosIsInShouldWork() throws Exception {
-        // Initialize the database
-        reglaRepository.saveAndFlush(regla);
-
-        // Get all the reglaList where dispositivosAsociados in DEFAULT_DISPOSITIVOS_ASOCIADOS or UPDATED_DISPOSITIVOS_ASOCIADOS
-        defaultReglaShouldBeFound("dispositivosAsociados.in=" + DEFAULT_DISPOSITIVOS_ASOCIADOS + "," + UPDATED_DISPOSITIVOS_ASOCIADOS);
-
-        // Get all the reglaList where dispositivosAsociados equals to UPDATED_DISPOSITIVOS_ASOCIADOS
-        defaultReglaShouldNotBeFound("dispositivosAsociados.in=" + UPDATED_DISPOSITIVOS_ASOCIADOS);
-    }
-
-    @Test
-    @Transactional
-    public void getAllReglasByDispositivosAsociadosIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        reglaRepository.saveAndFlush(regla);
-
-        // Get all the reglaList where dispositivosAsociados is not null
-        defaultReglaShouldBeFound("dispositivosAsociados.specified=true");
-
-        // Get all the reglaList where dispositivosAsociados is null
-        defaultReglaShouldNotBeFound("dispositivosAsociados.specified=false");
-    }
     /**
      * Executes the search, and checks that the default entity is returned
      */
@@ -314,8 +288,7 @@ public class ReglaResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(regla.getId().intValue())))
             .andExpect(jsonPath("$.[*].nombre").value(hasItem(DEFAULT_NOMBRE)))
-            .andExpect(jsonPath("$.[*].logica").value(hasItem(DEFAULT_LOGICA)))
-            .andExpect(jsonPath("$.[*].dispositivosAsociados").value(hasItem(DEFAULT_DISPOSITIVOS_ASOCIADOS)));
+            .andExpect(jsonPath("$.[*].logica").value(hasItem(DEFAULT_LOGICA)));
 
         // Check, that the count call also returns 1
         restReglaMockMvc.perform(get("/api/reglas/count?sort=id,desc&" + filter))
@@ -364,8 +337,7 @@ public class ReglaResourceIntTest {
         em.detach(updatedRegla);
         updatedRegla
             .nombre(UPDATED_NOMBRE)
-            .logica(UPDATED_LOGICA)
-            .dispositivosAsociados(UPDATED_DISPOSITIVOS_ASOCIADOS);
+            .logica(UPDATED_LOGICA);
         ReglaDTO reglaDTO = reglaMapper.toDto(updatedRegla);
 
         restReglaMockMvc.perform(put("/api/reglas")
@@ -379,7 +351,6 @@ public class ReglaResourceIntTest {
         Regla testRegla = reglaList.get(reglaList.size() - 1);
         assertThat(testRegla.getNombre()).isEqualTo(UPDATED_NOMBRE);
         assertThat(testRegla.getLogica()).isEqualTo(UPDATED_LOGICA);
-        assertThat(testRegla.getDispositivosAsociados()).isEqualTo(UPDATED_DISPOSITIVOS_ASOCIADOS);
     }
 
     @Test

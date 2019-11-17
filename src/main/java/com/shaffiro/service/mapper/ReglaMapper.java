@@ -12,6 +12,8 @@ import org.mapstruct.*;
 public interface ReglaMapper extends EntityMapper<ReglaDTO, Regla> {
 
 
+    @Mapping(target = "dispositivos", ignore = true)
+    Regla toEntity(ReglaDTO reglaDTO);
 
     default Regla fromId(Long id) {
         if (id == null) {
