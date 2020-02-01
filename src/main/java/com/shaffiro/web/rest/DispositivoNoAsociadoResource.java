@@ -1,26 +1,20 @@
 package com.shaffiro.web.rest;
-import com.shaffiro.domain.DispositivoNoAsociado;
 import com.shaffiro.service.DispositivoNoAsociadoService;
 import com.shaffiro.web.rest.errors.BadRequestAlertException;
 import com.shaffiro.web.rest.util.HeaderUtil;
 import com.shaffiro.service.dto.DispositivoNoAsociadoDTO;
 import io.github.jhipster.web.util.ResponseUtil;
-import io.vertx.core.Vertx;
-import io.vertx.core.buffer.Buffer;
-import io.vertx.core.datagram.DatagramSocket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 /**
  * REST controller for managing DispositivoNoAsociado.
@@ -47,7 +41,7 @@ public class DispositivoNoAsociadoResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/dispositivo-no-asociados")
-    public ResponseEntity<DispositivoNoAsociadoDTO> createDispositivoNoAsociado(@RequestBody DispositivoNoAsociadoDTO dispositivoNoAsociadoDTO) throws URISyntaxException {
+    public ResponseEntity<DispositivoNoAsociadoDTO> createDispositivoNoAsociado(@Valid @RequestBody DispositivoNoAsociadoDTO dispositivoNoAsociadoDTO) throws URISyntaxException {
         log.debug("REST request to save DispositivoNoAsociado : {}", dispositivoNoAsociadoDTO);
         if (dispositivoNoAsociadoDTO.getId() != null) {
             throw new BadRequestAlertException("A new dispositivoNoAsociado cannot already have an ID", ENTITY_NAME, "idexists");
@@ -68,7 +62,7 @@ public class DispositivoNoAsociadoResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/dispositivo-no-asociados")
-    public ResponseEntity<DispositivoNoAsociadoDTO> updateDispositivoNoAsociado(@RequestBody DispositivoNoAsociadoDTO dispositivoNoAsociadoDTO) throws URISyntaxException {
+    public ResponseEntity<DispositivoNoAsociadoDTO> updateDispositivoNoAsociado(@Valid @RequestBody DispositivoNoAsociadoDTO dispositivoNoAsociadoDTO) throws URISyntaxException {
         log.debug("REST request to update DispositivoNoAsociado : {}", dispositivoNoAsociadoDTO);
         if (dispositivoNoAsociadoDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
@@ -114,20 +108,5 @@ public class DispositivoNoAsociadoResource {
         log.debug("REST request to delete DispositivoNoAsociado : {}", id);
         dispositivoNoAsociadoService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
-    }
-
-    @PostMapping("/pair/{mac}")
-    public ResponseEntity<Void> pairDevice(@PathVariable String mac, @RequestBody String config){
-        Vertx vertx = Vertx.vertx();
-        DatagramSocket socket = vertx.createDatagramSocket();
-        log.debug("Pairing device with MAC: " + mac);
-        DispositivoNoAsociadoDTO dispositivoNoAsociado = dispositivoNoAsociadoService.findAll()
-            .stream()
-            .filter(dev -> dev.getMac().equals(mac)).collect(Collectors.toList()).get(0);
-        Buffer buffer = Buffer.buffer(config);
-        socket.send(buffer, 2500, dispositivoNoAsociado.getUuid(), asyncResult -> {
-            log.info("Send succeeded? " + asyncResult.succeeded());
-        });
-        return ResponseEntity.ok().build();
     }
 }
