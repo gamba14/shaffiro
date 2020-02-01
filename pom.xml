@@ -381,7 +381,26 @@
             <version>3.8.3</version>
             <scope>test</scope>
         </dependency>
-	</dependencies>
+        <!-- https://mvnrepository.com/artifact/org.jeasy/easy-rules -->
+        <!-- https://mvnrepository.com/artifact/org.jeasy/easy-rules -->
+        <dependency>
+            <groupId>org.jeasy</groupId>
+            <artifactId>easy-rules</artifactId>
+            <version>3.3.0</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>com.deliveredtechnologies</groupId>
+            <artifactId>rulebook-core</artifactId>
+            <version>0.11</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+
+    </dependencies>
 
 	<build>
 		<defaultGoal>spring-boot:run</defaultGoal>

@@ -29,8 +29,14 @@ public class Regla implements Serializable {
     @Column(name = "nombre")
     private String nombre;
 
-    @Column(name = "logica")
-    private String logica;
+    @Column(name = "antecedente")
+    private String antecedente;
+
+    @Column(name = "concecuente")
+    private String concecuente;
+
+    @Column(name = "operador")
+    private String operador;
 
     @OneToMany(mappedBy = "regla")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -57,17 +63,43 @@ public class Regla implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getLogica() {
-        return logica;
+    public String getAntecedente() {
+        return antecedente;
     }
 
-    public Regla logica(String logica) {
-        this.logica = logica;
+    public Regla antecedente(String antecedente) {
+        this.antecedente = antecedente;
         return this;
     }
 
-    public void setLogica(String logica) {
-        this.logica = logica;
+    public void setAntecedente(String antecedente) {
+        this.antecedente = antecedente;
+    }
+
+    public String getConcecuente() {
+        return concecuente;
+    }
+
+    public Regla concecuente(String concecuente) {
+        this.concecuente = concecuente;
+        return this;
+    }
+
+    public void setConcecuente(String concecuente) {
+        this.concecuente = concecuente;
+    }
+
+    public String getOperador() {
+        return operador;
+    }
+
+    public Regla operador(String operador) {
+        this.operador = operador;
+        return this;
+    }
+
+    public void setOperador(String operador) {
+        this.operador = operador;
     }
 
     public Set<Dispositivo> getDispositivos() {
@@ -121,7 +153,9 @@ public class Regla implements Serializable {
         return "Regla{" +
             "id=" + getId() +
             ", nombre='" + getNombre() + "'" +
-            ", logica='" + getLogica() + "'" +
+            ", antecedente='" + getAntecedente() + "'" +
+            ", concecuente='" + getConcecuente() + "'" +
+            ", operador='" + getOperador() + "'" +
             "}";
     }
 }

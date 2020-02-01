@@ -32,30 +32,6 @@ public class MQTTConfiguration {
                 ar.cause().printStackTrace();
             }
         });
-       /* mqttServer.endpointHandler(endpoint -> {
-
-            // shows main connect info
-            log.debug("MQTT client [" + endpoint.clientIdentifier() + "] request to connect, clean session = " + endpoint.isCleanSession());
-
-            if (endpoint.auth() != null) {
-                log.debug("[username = " + endpoint.auth().getUsername() + ", password = " + endpoint.auth().getPassword() + "]");
-            }
-            if (endpoint.will() != null) {
-                log.debug("[will topic = " + endpoint.will().getWillTopic() + " msg = " + new String(endpoint.will().getWillMessageBytes()) +
-                    " QoS = " + endpoint.will().getWillQos() + " isRetain = " + endpoint.will().isWillRetain() + "]");
-            }
-
-            log.debug("[keep alive timeout = " + endpoint.keepAliveTimeSeconds() + "]");
-
-            endpoint.publishHandler(mqttPublishMessage ->
-
-                log.debug("Just received message " + mqttPublishMessage.payload().toString()+" ] with QoS ["+ mqttPublishMessage.qosLevel().toString() + "]")
-            );
-            // accept connection from the remote client
-            endpoint.accept(false);
-
-        })*/
-
         return mqttServer;
     }
 }

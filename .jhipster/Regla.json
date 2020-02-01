@@ -17,10 +17,20 @@
             "fieldValidateRules": []
         },
         {
-            "fieldName": "logica",
+            "fieldName": "antecedente",
+            "fieldType": "String",
+            "fieldValidateRules": []
+        },
+        {
+            "fieldName": "concecuente",
+            "fieldType": "String",
+            "fieldValidateRules": []
+        },{
+            "fieldName": "operador",
             "fieldType": "String",
             "fieldValidateRules": []
         }
+         
     ],
     "changelogDate": "20191031223258",
     "dto": "mapstruct",
