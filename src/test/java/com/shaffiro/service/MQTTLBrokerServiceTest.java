@@ -1,6 +1,7 @@
 package com.shaffiro.service;
 
 import io.vertx.mqtt.MqttEndpoint;
+import io.vertx.mqtt.MqttServer;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

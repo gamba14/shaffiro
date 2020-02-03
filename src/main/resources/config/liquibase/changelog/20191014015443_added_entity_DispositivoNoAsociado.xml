@@ -23,7 +23,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="mac" type="varchar(255)">
-                <constraints nullable="true" />
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_dispositivo_no_asociado_mac" />
             </column>
 
             <column name="uuid" type="varchar(255)">

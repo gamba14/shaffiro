@@ -13,6 +13,8 @@
                     <label class="form-control-label" jhiTranslate="shaffiroApp.dispositivoNoAsociado.mac" for="field_mac">Mac</label>
                     <input type="text" class="form-control" name="mac" id="field_mac"
                         [(ngModel)]="dispositivoNoAsociado.mac" />
+                    <div [hidden]="!(editForm.controls.mac?.dirty && editForm.controls.mac?.invalid)">
+                    </div>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="shaffiroApp.dispositivoNoAsociado.uuid" for="field_uuid">Uuid</label>

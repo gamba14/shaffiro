@@ -16,7 +16,9 @@
                 "title": "Regla"
             },
             "nombre": "Nombre",
-            "logica": "Logica",
+            "antecedente": "Antecedente",
+            "concecuente": "Concecuente",
+            "operador": "Operador",
             "dispositivo": "Dispositivo"
         }
     }

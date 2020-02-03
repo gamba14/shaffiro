@@ -26,7 +26,11 @@ public class ReglaCriteria implements Serializable {
 
     private StringFilter nombre;
 
-    private StringFilter logica;
+    private StringFilter antecedente;
+
+    private StringFilter concecuente;
+
+    private StringFilter operador;
 
     private LongFilter dispositivoId;
 
@@ -46,12 +50,28 @@ public class ReglaCriteria implements Serializable {
         this.nombre = nombre;
     }
 
-    public StringFilter getLogica() {
-        return logica;
+    public StringFilter getAntecedente() {
+        return antecedente;
     }
 
-    public void setLogica(StringFilter logica) {
-        this.logica = logica;
+    public void setAntecedente(StringFilter antecedente) {
+        this.antecedente = antecedente;
+    }
+
+    public StringFilter getConcecuente() {
+        return concecuente;
+    }
+
+    public void setConcecuente(StringFilter concecuente) {
+        this.concecuente = concecuente;
+    }
+
+    public StringFilter getOperador() {
+        return operador;
+    }
+
+    public void setOperador(StringFilter operador) {
+        this.operador = operador;
     }
 
     public LongFilter getDispositivoId() {
@@ -75,7 +95,9 @@ public class ReglaCriteria implements Serializable {
         return
             Objects.equals(id, that.id) &&
             Objects.equals(nombre, that.nombre) &&
-            Objects.equals(logica, that.logica) &&
+            Objects.equals(antecedente, that.antecedente) &&
+            Objects.equals(concecuente, that.concecuente) &&
+            Objects.equals(operador, that.operador) &&
             Objects.equals(dispositivoId, that.dispositivoId);
     }
 
@@ -84,7 +106,9 @@ public class ReglaCriteria implements Serializable {
         return Objects.hash(
         id,
         nombre,
-        logica,
+        antecedente,
+        concecuente,
+        operador,
         dispositivoId
         );
     }
@@ -94,7 +118,9 @@ public class ReglaCriteria implements Serializable {
         return "ReglaCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
                 (nombre != null ? "nombre=" + nombre + ", " : "") +
-                (logica != null ? "logica=" + logica + ", " : "") +
+                (antecedente != null ? "antecedente=" + antecedente + ", " : "") +
+                (concecuente != null ? "concecuente=" + concecuente + ", " : "") +
+                (operador != null ? "operador=" + operador + ", " : "") +
                 (dispositivoId != null ? "dispositivoId=" + dispositivoId + ", " : "") +
             "}";
     }

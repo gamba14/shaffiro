@@ -6,7 +6,7 @@
         {
             "fieldName": "mac",
             "fieldType": "String",
-            "fieldValidateRules": []
+            "fieldValidateRules": ["unique"]
         },
         {
             "fieldName": "uuid",

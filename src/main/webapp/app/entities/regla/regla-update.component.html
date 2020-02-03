@@ -15,9 +15,19 @@
                         [(ngModel)]="regla.nombre" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="shaffiroApp.regla.logica" for="field_logica">Logica</label>
-                    <input type="text" class="form-control" name="logica" id="field_logica"
-                        [(ngModel)]="regla.logica" />
+                    <label class="form-control-label" jhiTranslate="shaffiroApp.regla.antecedente" for="field_antecedente">Antecedente</label>
+                    <input type="text" class="form-control" name="antecedente" id="field_antecedente"
+                        [(ngModel)]="regla.antecedente" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="shaffiroApp.regla.concecuente" for="field_concecuente">Concecuente</label>
+                    <input type="text" class="form-control" name="concecuente" id="field_concecuente"
+                        [(ngModel)]="regla.concecuente" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="shaffiroApp.regla.operador" for="field_operador">Operador</label>
+                    <input type="text" class="form-control" name="operador" id="field_operador"
+                        [(ngModel)]="regla.operador" />
                 </div>
 
             </div>

@@ -1,4 +1,5 @@
 package com.shaffiro.service.dto;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -9,6 +10,7 @@ public class DispositivoNoAsociadoDTO implements Serializable {
 
     private Long id;
 
+    
     private String mac;
 
     private String uuid;

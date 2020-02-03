@@ -11,7 +11,11 @@ public class ReglaDTO implements Serializable {
 
     private String nombre;
 
-    private String logica;
+    private String antecedente;
+
+    private String concecuente;
+
+    private String operador;
 
 
     public Long getId() {
@@ -30,12 +34,28 @@ public class ReglaDTO implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getLogica() {
-        return logica;
+    public String getAntecedente() {
+        return antecedente;
     }
 
-    public void setLogica(String logica) {
-        this.logica = logica;
+    public void setAntecedente(String antecedente) {
+        this.antecedente = antecedente;
+    }
+
+    public String getConcecuente() {
+        return concecuente;
+    }
+
+    public void setConcecuente(String concecuente) {
+        this.concecuente = concecuente;
+    }
+
+    public String getOperador() {
+        return operador;
+    }
+
+    public void setOperador(String operador) {
+        this.operador = operador;
     }
 
     @Override
@@ -64,7 +84,9 @@ public class ReglaDTO implements Serializable {
         return "ReglaDTO{" +
             "id=" + getId() +
             ", nombre='" + getNombre() + "'" +
-            ", logica='" + getLogica() + "'" +
+            ", antecedente='" + getAntecedente() + "'" +
+            ", concecuente='" + getConcecuente() + "'" +
+            ", operador='" + getOperador() + "'" +
             "}";
     }
 }
