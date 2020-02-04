@@ -32,7 +32,7 @@ public class ReglaCriteria implements Serializable {
 
     private StringFilter operador;
 
-    private LongFilter dispositivoId;
+    private LongFilter dispositivoAsociadoId;
 
     public LongFilter getId() {
         return id;
@@ -74,12 +74,12 @@ public class ReglaCriteria implements Serializable {
         this.operador = operador;
     }
 
-    public LongFilter getDispositivoId() {
-        return dispositivoId;
+    public LongFilter getDispositivoAsociadoId() {
+        return dispositivoAsociadoId;
     }
 
-    public void setDispositivoId(LongFilter dispositivoId) {
-        this.dispositivoId = dispositivoId;
+    public void setDispositivoAsociadoId(LongFilter dispositivoAsociadoId) {
+        this.dispositivoAsociadoId = dispositivoAsociadoId;
     }
 
 
@@ -98,7 +98,7 @@ public class ReglaCriteria implements Serializable {
             Objects.equals(antecedente, that.antecedente) &&
             Objects.equals(concecuente, that.concecuente) &&
             Objects.equals(operador, that.operador) &&
-            Objects.equals(dispositivoId, that.dispositivoId);
+            Objects.equals(dispositivoAsociadoId, that.dispositivoAsociadoId);
     }
 
     @Override
@@ -109,7 +109,7 @@ public class ReglaCriteria implements Serializable {
         antecedente,
         concecuente,
         operador,
-        dispositivoId
+        dispositivoAsociadoId
         );
     }
 
@@ -121,7 +121,7 @@ public class ReglaCriteria implements Serializable {
                 (antecedente != null ? "antecedente=" + antecedente + ", " : "") +
                 (concecuente != null ? "concecuente=" + concecuente + ", " : "") +
                 (operador != null ? "operador=" + operador + ", " : "") +
-                (dispositivoId != null ? "dispositivoId=" + dispositivoId + ", " : "") +
+                (dispositivoAsociadoId != null ? "dispositivoAsociadoId=" + dispositivoAsociadoId + ", " : "") +
             "}";
     }
 

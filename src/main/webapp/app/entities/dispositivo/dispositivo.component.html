@@ -19,7 +19,6 @@
             <th><span jhiTranslate="shaffiroApp.dispositivo.tipo">Tipo</span></th>
             <th><span jhiTranslate="shaffiroApp.dispositivo.activo">Activo</span></th>
             <th><span jhiTranslate="shaffiroApp.dispositivo.configuracion">Configuracion</span></th>
-            <th><span jhiTranslate="shaffiroApp.dispositivo.regla">Regla</span></th>
             <th></th>
             </tr>
             </thead>
@@ -30,11 +29,6 @@
                 <td jhiTranslate="{{'shaffiroApp.TipoDispositivo.' + dispositivo.tipo}}">{{dispositivo.tipo}}</td>
                 <td>{{dispositivo.activo}}</td>
                 <td>{{dispositivo.configuracion}}</td>
-                <td>
-                    <div *ngIf="dispositivo.reglaId">
-                        <a [routerLink]="['../regla', dispositivo.reglaId , 'view' ]" >{{dispositivo.reglaId}}</a>
-                    </div>
-                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

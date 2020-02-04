@@ -19,8 +19,6 @@ public class DispositivoDTO implements Serializable {
     private String configuracion;
 
 
-    private Long reglaId;
-
     public Long getId() {
         return id;
     }
@@ -61,14 +59,6 @@ public class DispositivoDTO implements Serializable {
         this.configuracion = configuracion;
     }
 
-    public Long getReglaId() {
-        return reglaId;
-    }
-
-    public void setReglaId(Long reglaId) {
-        this.reglaId = reglaId;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -98,7 +88,6 @@ public class DispositivoDTO implements Serializable {
             ", tipo='" + getTipo() + "'" +
             ", activo='" + isActivo() + "'" +
             ", configuracion='" + getConfiguracion() + "'" +
-            ", regla=" + getReglaId() +
             "}";
     }
 }

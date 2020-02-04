@@ -30,6 +30,13 @@
                         [(ngModel)]="regla.operador" />
                 </div>
 
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="shaffiroApp.regla.dispositivoAsociado" for="field_dispositivoAsociado">Dispositivo Asociado</label>
+                    <select class="form-control" id="field_dispositivoAsociado" name="dispositivoAsociado" [(ngModel)]="regla.dispositivoAsociadoId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="dispositivoOption.id" *ngFor="let dispositivoOption of dispositivos; trackBy: trackDispositivoById">{{dispositivoOption.id}}</option>
+                    </select>
+                </div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

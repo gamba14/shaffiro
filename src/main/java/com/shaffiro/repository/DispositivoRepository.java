@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface DispositivoRepository extends JpaRepository<Dispositivo, Long>{
+public interface DispositivoRepository extends JpaRepository<Dispositivo, Long> {
 
 }

@@ -19,7 +19,7 @@
             "antecedente": "Antecedente",
             "concecuente": "Concecuente",
             "operador": "Operador",
-            "dispositivo": "Dispositivo"
+            "dispositivoAsociado": "Dispositivo Asociado"
         }
     }
 }

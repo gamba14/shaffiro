@@ -3,11 +3,12 @@
     "clientRootFolder": "",
     "relationships": [
         {
-            "relationshipName": "dispositivo",
+            "relationshipName": "dispositivoAsociado",
             "otherEntityName": "dispositivo",
-            "relationshipType": "one-to-many",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id",
             "otherEntityRelationshipName": "regla",
-            "otherEntityRelationshipNameUndefined": false
+            "otherEntityRelationshipNameUndefined": true
         }
     ],
     "fields": [
@@ -25,12 +26,12 @@
             "fieldName": "concecuente",
             "fieldType": "String",
             "fieldValidateRules": []
-        },{
+        },
+        {
             "fieldName": "operador",
             "fieldType": "String",
             "fieldValidateRules": []
         }
-         
     ],
     "changelogDate": "20191031223258",
     "dto": "mapstruct",

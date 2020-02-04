@@ -21,12 +21,6 @@
                 <dd>
                     <span>{{dispositivo.configuracion}}</span>
                 </dd>
-                <dt><span jhiTranslate="shaffiroApp.dispositivo.regla">Regla</span></dt>
-                <dd>
-                    <div *ngIf="dispositivo.reglaId">
-                        <a [routerLink]="['/regla', dispositivo.reglaId, 'view']">{{dispositivo.reglaId}}</a>
-                    </div>
-                </dd>
             </dl>
 
             <button type="submit"

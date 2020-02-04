@@ -3,8 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
+import { JhiAlertService } from 'ng-jhipster';
 import { IRegla } from 'app/shared/model/regla.model';
 import { ReglaService } from './regla.service';
+import { IDispositivo } from 'app/shared/model/dispositivo.model';
+import { DispositivoService } from 'app/entities/dispositivo';
 
 @Component({
     selector: 'jhi-regla-update',
@@ -14,13 +17,27 @@ export class ReglaUpdateComponent implements OnInit {
     regla: IRegla;
     isSaving: boolean;
 
-    constructor(protected reglaService: ReglaService, protected activatedRoute: ActivatedRoute) {}
+    dispositivos: IDispositivo[];
+
+    constructor(
+        protected jhiAlertService: JhiAlertService,
+        protected reglaService: ReglaService,
+        protected dispositivoService: DispositivoService,
+        protected activatedRoute: ActivatedRoute
+    ) {}
 
     ngOnInit() {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ regla }) => {
             this.regla = regla;
         });
+        this.dispositivoService
+            .query()
+            .pipe(
+                filter((mayBeOk: HttpResponse<IDispositivo[]>) => mayBeOk.ok),
+                map((response: HttpResponse<IDispositivo[]>) => response.body)
+            )
+            .subscribe((res: IDispositivo[]) => (this.dispositivos = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     previousState() {
@@ -47,5 +64,13 @@ export class ReglaUpdateComponent implements OnInit {
 
     protected onSaveError() {
         this.isSaving = false;
+    }
+
+    protected onError(errorMessage: string) {
+        this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    trackDispositivoById(index: number, item: IDispositivo) {
+        return item.id;
     }
 }

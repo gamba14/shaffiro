@@ -32,13 +32,6 @@
                         [(ngModel)]="dispositivo.configuracion" />
                 </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="shaffiroApp.dispositivo.regla" for="field_regla">Regla</label>
-                    <select class="form-control" id="field_regla" name="regla" [(ngModel)]="dispositivo.reglaId" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="reglaOption.id" *ngFor="let reglaOption of reglas; trackBy: trackReglaById">{{reglaOption.id}}</option>
-                    </select>
-                </div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

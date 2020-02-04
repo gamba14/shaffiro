@@ -19,6 +19,7 @@
             <th><span jhiTranslate="shaffiroApp.regla.antecedente">Antecedente</span></th>
             <th><span jhiTranslate="shaffiroApp.regla.concecuente">Concecuente</span></th>
             <th><span jhiTranslate="shaffiroApp.regla.operador">Operador</span></th>
+            <th><span jhiTranslate="shaffiroApp.regla.dispositivoAsociado">Dispositivo Asociado</span></th>
             <th></th>
             </tr>
             </thead>
@@ -29,6 +30,11 @@
                 <td>{{regla.antecedente}}</td>
                 <td>{{regla.concecuente}}</td>
                 <td>{{regla.operador}}</td>
+                <td>
+                    <div *ngIf="regla.dispositivoAsociadoId">
+                        <a [routerLink]="['../dispositivo', regla.dispositivoAsociadoId , 'view' ]" >{{regla.dispositivoAsociadoId}}</a>
+                    </div>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

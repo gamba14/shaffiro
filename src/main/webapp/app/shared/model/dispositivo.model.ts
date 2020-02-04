@@ -1,3 +1,5 @@
+import { IRegla } from 'app/shared/model/regla.model';
+
 export const enum TipoDispositivo {
     SENSOR = 'SENSOR',
     ACTUADOR = 'ACTUADOR'
@@ -9,7 +11,7 @@ export interface IDispositivo {
     tipo?: TipoDispositivo;
     activo?: boolean;
     configuracion?: string;
-    reglaId?: number;
+    reglas?: IRegla[];
 }
 
 export class Dispositivo implements IDispositivo {
@@ -19,7 +21,7 @@ export class Dispositivo implements IDispositivo {
         public tipo?: TipoDispositivo,
         public activo?: boolean,
         public configuracion?: string,
-        public reglaId?: number
+        public reglas?: IRegla[]
     ) {
         this.activo = this.activo || false;
     }

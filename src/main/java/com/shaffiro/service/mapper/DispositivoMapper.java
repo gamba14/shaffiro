@@ -8,13 +8,11 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity Dispositivo and its DTO DispositivoDTO.
  */
-@Mapper(componentModel = "spring", uses = {ReglaMapper.class})
+@Mapper(componentModel = "spring", uses = {})
 public interface DispositivoMapper extends EntityMapper<DispositivoDTO, Dispositivo> {
 
-    @Mapping(source = "regla.id", target = "reglaId")
-    DispositivoDTO toDto(Dispositivo dispositivo);
 
-    @Mapping(source = "reglaId", target = "regla")
+    @Mapping(target = "reglas", ignore = true)
     Dispositivo toEntity(DispositivoDTO dispositivoDTO);
 
     default Dispositivo fromId(Long id) {

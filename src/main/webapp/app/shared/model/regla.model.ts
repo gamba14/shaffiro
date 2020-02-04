@@ -1,12 +1,10 @@
-import { IDispositivo } from 'app/shared/model/dispositivo.model';
-
 export interface IRegla {
     id?: number;
     nombre?: string;
     antecedente?: string;
     concecuente?: string;
     operador?: string;
-    dispositivos?: IDispositivo[];
+    dispositivoAsociadoId?: number;
 }
 
 export class Regla implements IRegla {
@@ -16,6 +14,6 @@ export class Regla implements IRegla {
         public antecedente?: string,
         public concecuente?: string,
         public operador?: string,
-        public dispositivos?: IDispositivo[]
+        public dispositivoAsociadoId?: number
     ) {}
 }

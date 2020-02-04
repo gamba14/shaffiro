@@ -82,5 +82,4 @@ public class DispositivoService {
         log.debug("Request to delete Dispositivo : {}", id);
         dispositivoRepository.deleteById(id);
     }
-
 }

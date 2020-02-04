@@ -5,10 +5,9 @@
         {
             "relationshipName": "regla",
             "otherEntityName": "regla",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id",
-            "otherEntityRelationshipName": "dispositivo",
-            "otherEntityRelationshipNameUndefined": true
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "dispositivoAsociado",
+            "otherEntityRelationshipNameUndefined": false
         }
     ],
     "fields": [

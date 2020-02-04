@@ -84,12 +84,7 @@ public class MQTTBrokerService {
 
     private void handle(MqttPublishMessage message) {
         log.debug("Received message [" + message.payload().toString() + "] from " /*+ message.clientID*/);
-        //Hago esto hasta tener implementacion a nivel DB
-        //TODO fix it
-//        List<DispositivoDTO> dispositivosList = dispositivoService.findAll();
-//        DispositivoDTO dispositivoDTO = dispositivosList.stream()
-//            .filter(dispositivoDTO1 -> dispositivoDTO1.getNombre().equals(clientID)).collect(Collectors.toList()).get(0);
-//        log.debug(dispositivoDTO.toString());
+
         publish(message);
 
     }

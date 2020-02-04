@@ -1,13 +1,15 @@
 package com.shaffiro.domain;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 import com.shaffiro.domain.enumeration.TipoDispositivo;
@@ -39,10 +41,9 @@ public class Dispositivo implements Serializable {
     @Column(name = "configuracion")
     private String configuracion;
 
-    @ManyToOne
-    @JsonIgnoreProperties("dispositivos")
-    private Regla regla;
-
+    @OneToMany(mappedBy = "dispositivoAsociado")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Regla> reglas = new HashSet<>();
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -104,17 +105,29 @@ public class Dispositivo implements Serializable {
         this.configuracion = configuracion;
     }
 
-    public Regla getRegla() {
-        return regla;
+    public Set<Regla> getReglas() {
+        return reglas;
     }
 
-    public Dispositivo regla(Regla regla) {
-        this.regla = regla;
+    public Dispositivo reglas(Set<Regla> reglas) {
+        this.reglas = reglas;
         return this;
     }
 
-    public void setRegla(Regla regla) {
-        this.regla = regla;
+    public Dispositivo addRegla(Regla regla) {
+        this.reglas.add(regla);
+        regla.setDispositivoAsociado(this);
+        return this;
+    }
+
+    public Dispositivo removeRegla(Regla regla) {
+        this.reglas.remove(regla);
+        regla.setDispositivoAsociado(null);
+        return this;
+    }
+
+    public void setReglas(Set<Regla> reglas) {
+        this.reglas = reglas;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
