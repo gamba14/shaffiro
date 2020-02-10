@@ -18,12 +18,13 @@
             "fieldValidateRules": []
         },
         {
-            "fieldName": "antecedente",
-            "fieldType": "String",
+            "fieldName": "unidad",
+            "fieldType": "Unidad",
+            "fieldValues": "CELSIUS,AMPERE,LUMENES",
             "fieldValidateRules": []
         },
         {
-            "fieldName": "concecuente",
+            "fieldName": "valor",
             "fieldType": "String",
             "fieldValidateRules": []
         },

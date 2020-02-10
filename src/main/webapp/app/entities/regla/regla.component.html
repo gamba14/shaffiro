@@ -16,8 +16,8 @@
             <tr>
             <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="shaffiroApp.regla.nombre">Nombre</span></th>
-            <th><span jhiTranslate="shaffiroApp.regla.antecedente">Antecedente</span></th>
-            <th><span jhiTranslate="shaffiroApp.regla.concecuente">Concecuente</span></th>
+            <th><span jhiTranslate="shaffiroApp.regla.unidad">Unidad</span></th>
+            <th><span jhiTranslate="shaffiroApp.regla.valor">Valor</span></th>
             <th><span jhiTranslate="shaffiroApp.regla.operador">Operador</span></th>
             <th><span jhiTranslate="shaffiroApp.regla.dispositivoAsociado">Dispositivo Asociado</span></th>
             <th></th>
@@ -27,8 +27,8 @@
             <tr *ngFor="let regla of reglas ;trackBy: trackId">
                 <td><a [routerLink]="['/regla', regla.id, 'view' ]">{{regla.id}}</a></td>
                 <td>{{regla.nombre}}</td>
-                <td>{{regla.antecedente}}</td>
-                <td>{{regla.concecuente}}</td>
+                <td jhiTranslate="{{'shaffiroApp.Unidad.' + regla.unidad}}">{{regla.unidad}}</td>
+                <td>{{regla.valor}}</td>
                 <td>{{regla.operador}}</td>
                 <td>
                     <div *ngIf="regla.dispositivoAsociadoId">

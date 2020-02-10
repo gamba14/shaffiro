@@ -16,8 +16,8 @@
                 "title": "Regla"
             },
             "nombre": "Nombre",
-            "antecedente": "Antecedente",
-            "concecuente": "Concecuente",
+            "unidad": "Unidad",
+            "valor": "Valor",
             "operador": "Operador",
             "dispositivoAsociado": "Dispositivo Asociado"
         }

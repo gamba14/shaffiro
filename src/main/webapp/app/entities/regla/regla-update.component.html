@@ -15,14 +15,17 @@
                         [(ngModel)]="regla.nombre" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="shaffiroApp.regla.antecedente" for="field_antecedente">Antecedente</label>
-                    <input type="text" class="form-control" name="antecedente" id="field_antecedente"
-                        [(ngModel)]="regla.antecedente" />
+                    <label class="form-control-label" jhiTranslate="shaffiroApp.regla.unidad" for="field_unidad">Unidad</label>
+                    <select class="form-control" name="unidad" [(ngModel)]="regla.unidad" id="field_unidad" >
+                        <option value="CELSIUS">{{'shaffiroApp.Unidad.CELSIUS' | translate}}</option>
+                        <option value="AMPERE">{{'shaffiroApp.Unidad.AMPERE' | translate}}</option>
+                        <option value="LUMENES">{{'shaffiroApp.Unidad.LUMENES' | translate}}</option>
+                    </select>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="shaffiroApp.regla.concecuente" for="field_concecuente">Concecuente</label>
-                    <input type="text" class="form-control" name="concecuente" id="field_concecuente"
-                        [(ngModel)]="regla.concecuente" />
+                    <label class="form-control-label" jhiTranslate="shaffiroApp.regla.valor" for="field_valor">Valor</label>
+                    <input type="text" class="form-control" name="valor" id="field_valor"
+                        [(ngModel)]="regla.valor" />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="shaffiroApp.regla.operador" for="field_operador">Operador</label>

@@ -22,9 +22,8 @@ public class MQTTLBrokerServiceTest {
     @Before
     public void generateMocks() {
         endpoint = mock(MqttEndpoint.class);
-        DispositivoService dispositivoService = null;
-        ReglaService reglaService = null;
-        brokerService = new MQTTBrokerService(dispositivoService, reglaService);
+        ReglasEngineService reglasEngineService = null;
+        brokerService = new MQTTBrokerService(reglasEngineService);
     }
 
     @Test

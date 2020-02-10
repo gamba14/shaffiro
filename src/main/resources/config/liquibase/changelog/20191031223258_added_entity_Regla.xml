@@ -26,11 +26,11 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="antecedente" type="varchar(255)">
+            <column name="unidad" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
-            <column name="concecuente" type="varchar(255)">
+            <column name="valor" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 

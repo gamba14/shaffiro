@@ -1,0 +1,36 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="agustin (generated)" id="1581001326042-1">
+        <createTable tableName="dispositivo_reglas">
+            <column name="dispositivo_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="reglas_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="agustin (generated)" id="1581001326042-2">
+        <addColumn tableName="regla">
+            <column name="dispositivo_asociado_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="agustin (generated)" id="1581001326042-3">
+        <addPrimaryKey columnNames="dispositivo_id, reglas_id" tableName="dispositivo_reglas"/>
+    </changeSet>
+    <changeSet author="agustin (generated)" id="1581001326042-4">
+        <addUniqueConstraint columnNames="reglas_id" constraintName="UK_9kn2rg38vxmla1u5w8waxh9wa" tableName="dispositivo_reglas"/>
+    </changeSet>
+    <changeSet author="agustin (generated)" id="1581001326042-5">
+        <addForeignKeyConstraint baseColumnNames="dispositivo_id" baseTableName="dispositivo_reglas" constraintName="FK7ht499svmyygosquijblrlhb9" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="dispositivo"/>
+    </changeSet>
+    <changeSet author="agustin (generated)" id="1581001326042-6">
+        <addForeignKeyConstraint baseColumnNames="reglas_id" baseTableName="dispositivo_reglas" constraintName="FKeg5vh6qvn9lp43hsqu10rc0dd" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="regla"/>
+    </changeSet>
+    <changeSet author="agustin (generated)" id="1581001326042-7">
+        <addForeignKeyConstraint baseColumnNames="dispositivo_asociado_id" baseTableName="regla" constraintName="FKsaehcjkal8mecnhnk9bgv9wks" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="dispositivo"/>
+    </changeSet>
+    <changeSet author="agustin (generated)" id="1581001326042-8">
+        <dropColumn columnName="REGLA_ID" tableName="DISPOSITIVO"/>
+    </changeSet>
+</databaseChangeLog>

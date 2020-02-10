@@ -1,6 +1,8 @@
 package com.shaffiro.service.dto;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
+
 import com.shaffiro.domain.enumeration.TipoDispositivo;
 
 /**
@@ -17,6 +19,8 @@ public class DispositivoDTO implements Serializable {
     private Boolean activo;
 
     private String configuracion;
+
+    private Set<ReglaDTO> reglas;
 
 
     public Long getId() {
@@ -57,6 +61,14 @@ public class DispositivoDTO implements Serializable {
 
     public void setConfiguracion(String configuracion) {
         this.configuracion = configuracion;
+    }
+
+    public Set<ReglaDTO> getReglas() {
+        return reglas;
+    }
+
+    public void setReglas(Set<ReglaDTO> reglas) {
+        this.reglas = reglas;
     }
 
     @Override

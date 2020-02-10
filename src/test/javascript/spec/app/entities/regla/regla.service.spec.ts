@@ -5,7 +5,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { of } from 'rxjs';
 import { take, map } from 'rxjs/operators';
 import { ReglaService } from 'app/entities/regla/regla.service';
-import { IRegla, Regla } from 'app/shared/model/regla.model';
+import { IRegla, Regla, Unidad } from 'app/shared/model/regla.model';
 
 describe('Service Tests', () => {
     describe('Regla Service', () => {
@@ -21,7 +21,7 @@ describe('Service Tests', () => {
             service = injector.get(ReglaService);
             httpMock = injector.get(HttpTestingController);
 
-            elemDefault = new Regla(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA');
+            elemDefault = new Regla(0, 'AAAAAAA', Unidad.CELSIUS, 'AAAAAAA', 'AAAAAAA');
         });
 
         describe('Service methods', async () => {
@@ -56,8 +56,8 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         nombre: 'BBBBBB',
-                        antecedente: 'BBBBBB',
-                        concecuente: 'BBBBBB',
+                        unidad: 'BBBBBB',
+                        valor: 'BBBBBB',
                         operador: 'BBBBBB'
                     },
                     elemDefault
@@ -76,8 +76,8 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         nombre: 'BBBBBB',
-                        antecedente: 'BBBBBB',
-                        concecuente: 'BBBBBB',
+                        unidad: 'BBBBBB',
+                        valor: 'BBBBBB',
                         operador: 'BBBBBB'
                     },
                     elemDefault

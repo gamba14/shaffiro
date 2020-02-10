@@ -10,6 +10,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.shaffiro.domain.enumeration.Unidad;
+
 /**
  * A Regla.
  */
@@ -27,11 +29,12 @@ public class Regla implements Serializable {
     @Column(name = "nombre")
     private String nombre;
 
-    @Column(name = "antecedente")
-    private String antecedente;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "unidad")
+    private Unidad unidad;
 
-    @Column(name = "concecuente")
-    private String concecuente;
+    @Column(name = "valor")
+    private String valor;
 
     @Column(name = "operador")
     private String operador;
@@ -62,30 +65,30 @@ public class Regla implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getAntecedente() {
-        return antecedente;
+    public Unidad getUnidad() {
+        return unidad;
     }
 
-    public Regla antecedente(String antecedente) {
-        this.antecedente = antecedente;
+    public Regla unidad(Unidad unidad) {
+        this.unidad = unidad;
         return this;
     }
 
-    public void setAntecedente(String antecedente) {
-        this.antecedente = antecedente;
+    public void setUnidad(Unidad unidad) {
+        this.unidad = unidad;
     }
 
-    public String getConcecuente() {
-        return concecuente;
+    public String getValor() {
+        return valor;
     }
 
-    public Regla concecuente(String concecuente) {
-        this.concecuente = concecuente;
+    public Regla valor(String valor) {
+        this.valor = valor;
         return this;
     }
 
-    public void setConcecuente(String concecuente) {
-        this.concecuente = concecuente;
+    public void setValor(String valor) {
+        this.valor = valor;
     }
 
     public String getOperador() {
@@ -140,8 +143,8 @@ public class Regla implements Serializable {
         return "Regla{" +
             "id=" + getId() +
             ", nombre='" + getNombre() + "'" +
-            ", antecedente='" + getAntecedente() + "'" +
-            ", concecuente='" + getConcecuente() + "'" +
+            ", unidad='" + getUnidad() + "'" +
+            ", valor='" + getValor() + "'" +
             ", operador='" + getOperador() + "'" +
             "}";
     }

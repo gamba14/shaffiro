@@ -37,6 +37,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.shaffiro.domain.enumeration.Unidad;
 /**
  * Test class for the ReglaResource REST controller.
  *
@@ -49,11 +50,11 @@ public class ReglaResourceIntTest {
     private static final String DEFAULT_NOMBRE = "AAAAAAAAAA";
     private static final String UPDATED_NOMBRE = "BBBBBBBBBB";
 
-    private static final String DEFAULT_ANTECEDENTE = "AAAAAAAAAA";
-    private static final String UPDATED_ANTECEDENTE = "BBBBBBBBBB";
+    private static final Unidad DEFAULT_UNIDAD = Unidad.CELSIUS;
+    private static final Unidad UPDATED_UNIDAD = Unidad.AMPERE;
 
-    private static final String DEFAULT_CONCECUENTE = "AAAAAAAAAA";
-    private static final String UPDATED_CONCECUENTE = "BBBBBBBBBB";
+    private static final String DEFAULT_VALOR = "AAAAAAAAAA";
+    private static final String UPDATED_VALOR = "BBBBBBBBBB";
 
     private static final String DEFAULT_OPERADOR = "AAAAAAAAAA";
     private static final String UPDATED_OPERADOR = "BBBBBBBBBB";
@@ -110,8 +111,8 @@ public class ReglaResourceIntTest {
     public static Regla createEntity(EntityManager em) {
         Regla regla = new Regla()
             .nombre(DEFAULT_NOMBRE)
-            .antecedente(DEFAULT_ANTECEDENTE)
-            .concecuente(DEFAULT_CONCECUENTE)
+            .unidad(DEFAULT_UNIDAD)
+            .valor(DEFAULT_VALOR)
             .operador(DEFAULT_OPERADOR);
         return regla;
     }
@@ -138,8 +139,8 @@ public class ReglaResourceIntTest {
         assertThat(reglaList).hasSize(databaseSizeBeforeCreate + 1);
         Regla testRegla = reglaList.get(reglaList.size() - 1);
         assertThat(testRegla.getNombre()).isEqualTo(DEFAULT_NOMBRE);
-        assertThat(testRegla.getAntecedente()).isEqualTo(DEFAULT_ANTECEDENTE);
-        assertThat(testRegla.getConcecuente()).isEqualTo(DEFAULT_CONCECUENTE);
+        assertThat(testRegla.getUnidad()).isEqualTo(DEFAULT_UNIDAD);
+        assertThat(testRegla.getValor()).isEqualTo(DEFAULT_VALOR);
         assertThat(testRegla.getOperador()).isEqualTo(DEFAULT_OPERADOR);
     }
 
@@ -175,8 +176,8 @@ public class ReglaResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(regla.getId().intValue())))
             .andExpect(jsonPath("$.[*].nombre").value(hasItem(DEFAULT_NOMBRE.toString())))
-            .andExpect(jsonPath("$.[*].antecedente").value(hasItem(DEFAULT_ANTECEDENTE.toString())))
-            .andExpect(jsonPath("$.[*].concecuente").value(hasItem(DEFAULT_CONCECUENTE.toString())))
+            .andExpect(jsonPath("$.[*].unidad").value(hasItem(DEFAULT_UNIDAD.toString())))
+            .andExpect(jsonPath("$.[*].valor").value(hasItem(DEFAULT_VALOR.toString())))
             .andExpect(jsonPath("$.[*].operador").value(hasItem(DEFAULT_OPERADOR.toString())));
     }
     
@@ -192,8 +193,8 @@ public class ReglaResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(regla.getId().intValue()))
             .andExpect(jsonPath("$.nombre").value(DEFAULT_NOMBRE.toString()))
-            .andExpect(jsonPath("$.antecedente").value(DEFAULT_ANTECEDENTE.toString()))
-            .andExpect(jsonPath("$.concecuente").value(DEFAULT_CONCECUENTE.toString()))
+            .andExpect(jsonPath("$.unidad").value(DEFAULT_UNIDAD.toString()))
+            .andExpect(jsonPath("$.valor").value(DEFAULT_VALOR.toString()))
             .andExpect(jsonPath("$.operador").value(DEFAULT_OPERADOR.toString()));
     }
 
@@ -238,80 +239,80 @@ public class ReglaResourceIntTest {
 
     @Test
     @Transactional
-    public void getAllReglasByAntecedenteIsEqualToSomething() throws Exception {
+    public void getAllReglasByUnidadIsEqualToSomething() throws Exception {
         // Initialize the database
         reglaRepository.saveAndFlush(regla);
 
-        // Get all the reglaList where antecedente equals to DEFAULT_ANTECEDENTE
-        defaultReglaShouldBeFound("antecedente.equals=" + DEFAULT_ANTECEDENTE);
+        // Get all the reglaList where unidad equals to DEFAULT_UNIDAD
+        defaultReglaShouldBeFound("unidad.equals=" + DEFAULT_UNIDAD);
 
-        // Get all the reglaList where antecedente equals to UPDATED_ANTECEDENTE
-        defaultReglaShouldNotBeFound("antecedente.equals=" + UPDATED_ANTECEDENTE);
+        // Get all the reglaList where unidad equals to UPDATED_UNIDAD
+        defaultReglaShouldNotBeFound("unidad.equals=" + UPDATED_UNIDAD);
     }
 
     @Test
     @Transactional
-    public void getAllReglasByAntecedenteIsInShouldWork() throws Exception {
+    public void getAllReglasByUnidadIsInShouldWork() throws Exception {
         // Initialize the database
         reglaRepository.saveAndFlush(regla);
 
-        // Get all the reglaList where antecedente in DEFAULT_ANTECEDENTE or UPDATED_ANTECEDENTE
-        defaultReglaShouldBeFound("antecedente.in=" + DEFAULT_ANTECEDENTE + "," + UPDATED_ANTECEDENTE);
+        // Get all the reglaList where unidad in DEFAULT_UNIDAD or UPDATED_UNIDAD
+        defaultReglaShouldBeFound("unidad.in=" + DEFAULT_UNIDAD + "," + UPDATED_UNIDAD);
 
-        // Get all the reglaList where antecedente equals to UPDATED_ANTECEDENTE
-        defaultReglaShouldNotBeFound("antecedente.in=" + UPDATED_ANTECEDENTE);
+        // Get all the reglaList where unidad equals to UPDATED_UNIDAD
+        defaultReglaShouldNotBeFound("unidad.in=" + UPDATED_UNIDAD);
     }
 
     @Test
     @Transactional
-    public void getAllReglasByAntecedenteIsNullOrNotNull() throws Exception {
+    public void getAllReglasByUnidadIsNullOrNotNull() throws Exception {
         // Initialize the database
         reglaRepository.saveAndFlush(regla);
 
-        // Get all the reglaList where antecedente is not null
-        defaultReglaShouldBeFound("antecedente.specified=true");
+        // Get all the reglaList where unidad is not null
+        defaultReglaShouldBeFound("unidad.specified=true");
 
-        // Get all the reglaList where antecedente is null
-        defaultReglaShouldNotBeFound("antecedente.specified=false");
+        // Get all the reglaList where unidad is null
+        defaultReglaShouldNotBeFound("unidad.specified=false");
     }
 
     @Test
     @Transactional
-    public void getAllReglasByConcecuenteIsEqualToSomething() throws Exception {
+    public void getAllReglasByValorIsEqualToSomething() throws Exception {
         // Initialize the database
         reglaRepository.saveAndFlush(regla);
 
-        // Get all the reglaList where concecuente equals to DEFAULT_CONCECUENTE
-        defaultReglaShouldBeFound("concecuente.equals=" + DEFAULT_CONCECUENTE);
+        // Get all the reglaList where valor equals to DEFAULT_VALOR
+        defaultReglaShouldBeFound("valor.equals=" + DEFAULT_VALOR);
 
-        // Get all the reglaList where concecuente equals to UPDATED_CONCECUENTE
-        defaultReglaShouldNotBeFound("concecuente.equals=" + UPDATED_CONCECUENTE);
+        // Get all the reglaList where valor equals to UPDATED_VALOR
+        defaultReglaShouldNotBeFound("valor.equals=" + UPDATED_VALOR);
     }
 
     @Test
     @Transactional
-    public void getAllReglasByConcecuenteIsInShouldWork() throws Exception {
+    public void getAllReglasByValorIsInShouldWork() throws Exception {
         // Initialize the database
         reglaRepository.saveAndFlush(regla);
 
-        // Get all the reglaList where concecuente in DEFAULT_CONCECUENTE or UPDATED_CONCECUENTE
-        defaultReglaShouldBeFound("concecuente.in=" + DEFAULT_CONCECUENTE + "," + UPDATED_CONCECUENTE);
+        // Get all the reglaList where valor in DEFAULT_VALOR or UPDATED_VALOR
+        defaultReglaShouldBeFound("valor.in=" + DEFAULT_VALOR + "," + UPDATED_VALOR);
 
-        // Get all the reglaList where concecuente equals to UPDATED_CONCECUENTE
-        defaultReglaShouldNotBeFound("concecuente.in=" + UPDATED_CONCECUENTE);
+        // Get all the reglaList where valor equals to UPDATED_VALOR
+        defaultReglaShouldNotBeFound("valor.in=" + UPDATED_VALOR);
     }
 
     @Test
     @Transactional
-    public void getAllReglasByConcecuenteIsNullOrNotNull() throws Exception {
+    public void getAllReglasByValorIsNullOrNotNull() throws Exception {
         // Initialize the database
         reglaRepository.saveAndFlush(regla);
 
-        // Get all the reglaList where concecuente is not null
-        defaultReglaShouldBeFound("concecuente.specified=true");
+        // Get all the reglaList where valor is not null
+        defaultReglaShouldBeFound("valor.specified=true");
 
-        // Get all the reglaList where concecuente is null
-        defaultReglaShouldNotBeFound("concecuente.specified=false");
+        // Get all the reglaList where valor is null
+        defaultReglaShouldNotBeFound("valor.specified=false");
     }
 
     @Test
@@ -380,8 +381,8 @@ public class ReglaResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(regla.getId().intValue())))
             .andExpect(jsonPath("$.[*].nombre").value(hasItem(DEFAULT_NOMBRE)))
-            .andExpect(jsonPath("$.[*].antecedente").value(hasItem(DEFAULT_ANTECEDENTE)))
-            .andExpect(jsonPath("$.[*].concecuente").value(hasItem(DEFAULT_CONCECUENTE)))
+            .andExpect(jsonPath("$.[*].unidad").value(hasItem(DEFAULT_UNIDAD.toString())))
+            .andExpect(jsonPath("$.[*].valor").value(hasItem(DEFAULT_VALOR)))
             .andExpect(jsonPath("$.[*].operador").value(hasItem(DEFAULT_OPERADOR)));
 
         // Check, that the count call also returns 1
@@ -431,8 +432,8 @@ public class ReglaResourceIntTest {
         em.detach(updatedRegla);
         updatedRegla
             .nombre(UPDATED_NOMBRE)
-            .antecedente(UPDATED_ANTECEDENTE)
-            .concecuente(UPDATED_CONCECUENTE)
+            .unidad(UPDATED_UNIDAD)
+            .valor(UPDATED_VALOR)
             .operador(UPDATED_OPERADOR);
         ReglaDTO reglaDTO = reglaMapper.toDto(updatedRegla);
 
@@ -446,8 +447,8 @@ public class ReglaResourceIntTest {
         assertThat(reglaList).hasSize(databaseSizeBeforeUpdate);
         Regla testRegla = reglaList.get(reglaList.size() - 1);
         assertThat(testRegla.getNombre()).isEqualTo(UPDATED_NOMBRE);
-        assertThat(testRegla.getAntecedente()).isEqualTo(UPDATED_ANTECEDENTE);
-        assertThat(testRegla.getConcecuente()).isEqualTo(UPDATED_CONCECUENTE);
+        assertThat(testRegla.getUnidad()).isEqualTo(UPDATED_UNIDAD);
+        assertThat(testRegla.getValor()).isEqualTo(UPDATED_VALOR);
         assertThat(testRegla.getOperador()).isEqualTo(UPDATED_OPERADOR);
     }
 

@@ -1,6 +1,7 @@
 package com.shaffiro.service.dto;
 import java.io.Serializable;
 import java.util.Objects;
+import com.shaffiro.domain.enumeration.Unidad;
 
 /**
  * A DTO for the Regla entity.
@@ -11,9 +12,9 @@ public class ReglaDTO implements Serializable {
 
     private String nombre;
 
-    private String antecedente;
+    private Unidad unidad;
 
-    private String concecuente;
+    private String valor;
 
     private String operador;
 
@@ -36,20 +37,20 @@ public class ReglaDTO implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getAntecedente() {
-        return antecedente;
+    public Unidad getUnidad() {
+        return unidad;
     }
 
-    public void setAntecedente(String antecedente) {
-        this.antecedente = antecedente;
+    public void setUnidad(Unidad unidad) {
+        this.unidad = unidad;
     }
 
-    public String getConcecuente() {
-        return concecuente;
+    public String getValor() {
+        return valor;
     }
 
-    public void setConcecuente(String concecuente) {
-        this.concecuente = concecuente;
+    public void setValor(String valor) {
+        this.valor = valor;
     }
 
     public String getOperador() {
@@ -94,8 +95,8 @@ public class ReglaDTO implements Serializable {
         return "ReglaDTO{" +
             "id=" + getId() +
             ", nombre='" + getNombre() + "'" +
-            ", antecedente='" + getAntecedente() + "'" +
-            ", concecuente='" + getConcecuente() + "'" +
+            ", unidad='" + getUnidad() + "'" +
+            ", valor='" + getValor() + "'" +
             ", operador='" + getOperador() + "'" +
             ", dispositivoAsociado=" + getDispositivoAsociadoId() +
             "}";

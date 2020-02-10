@@ -2,6 +2,7 @@ package com.shaffiro.service.dto;
 
 import java.io.Serializable;
 import java.util.Objects;
+import com.shaffiro.domain.enumeration.Unidad;
 import io.github.jhipster.service.filter.BooleanFilter;
 import io.github.jhipster.service.filter.DoubleFilter;
 import io.github.jhipster.service.filter.Filter;
@@ -19,6 +20,11 @@ import io.github.jhipster.service.filter.StringFilter;
  * fix type specific filters.
  */
 public class ReglaCriteria implements Serializable {
+    /**
+     * Class for filtering Unidad
+     */
+    public static class UnidadFilter extends Filter<Unidad> {
+    }
 
     private static final long serialVersionUID = 1L;
 
@@ -26,9 +32,9 @@ public class ReglaCriteria implements Serializable {
 
     private StringFilter nombre;
 
-    private StringFilter antecedente;
+    private UnidadFilter unidad;
 
-    private StringFilter concecuente;
+    private StringFilter valor;
 
     private StringFilter operador;
 
@@ -50,20 +56,20 @@ public class ReglaCriteria implements Serializable {
         this.nombre = nombre;
     }
 
-    public StringFilter getAntecedente() {
-        return antecedente;
+    public UnidadFilter getUnidad() {
+        return unidad;
     }
 
-    public void setAntecedente(StringFilter antecedente) {
-        this.antecedente = antecedente;
+    public void setUnidad(UnidadFilter unidad) {
+        this.unidad = unidad;
     }
 
-    public StringFilter getConcecuente() {
-        return concecuente;
+    public StringFilter getValor() {
+        return valor;
     }
 
-    public void setConcecuente(StringFilter concecuente) {
-        this.concecuente = concecuente;
+    public void setValor(StringFilter valor) {
+        this.valor = valor;
     }
 
     public StringFilter getOperador() {
@@ -95,8 +101,8 @@ public class ReglaCriteria implements Serializable {
         return
             Objects.equals(id, that.id) &&
             Objects.equals(nombre, that.nombre) &&
-            Objects.equals(antecedente, that.antecedente) &&
-            Objects.equals(concecuente, that.concecuente) &&
+            Objects.equals(unidad, that.unidad) &&
+            Objects.equals(valor, that.valor) &&
             Objects.equals(operador, that.operador) &&
             Objects.equals(dispositivoAsociadoId, that.dispositivoAsociadoId);
     }
@@ -106,8 +112,8 @@ public class ReglaCriteria implements Serializable {
         return Objects.hash(
         id,
         nombre,
-        antecedente,
-        concecuente,
+        unidad,
+        valor,
         operador,
         dispositivoAsociadoId
         );
@@ -118,8 +124,8 @@ public class ReglaCriteria implements Serializable {
         return "ReglaCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
                 (nombre != null ? "nombre=" + nombre + ", " : "") +
-                (antecedente != null ? "antecedente=" + antecedente + ", " : "") +
-                (concecuente != null ? "concecuente=" + concecuente + ", " : "") +
+                (unidad != null ? "unidad=" + unidad + ", " : "") +
+                (valor != null ? "valor=" + valor + ", " : "") +
                 (operador != null ? "operador=" + operador + ", " : "") +
                 (dispositivoAsociadoId != null ? "dispositivoAsociadoId=" + dispositivoAsociadoId + ", " : "") +
             "}";

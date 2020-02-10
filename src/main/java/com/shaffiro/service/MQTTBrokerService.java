@@ -1,29 +1,18 @@
 package com.shaffiro.service;
 
-import com.deliveredtechnologies.rulebook.FactMap;
-import com.deliveredtechnologies.rulebook.NameValueReferableMap;
-import com.deliveredtechnologies.rulebook.lang.RuleBookBuilder;
-import com.deliveredtechnologies.rulebook.model.RuleBook;
-import com.shaffiro.config.MQTTConfiguration;
-import com.shaffiro.service.dto.DispositivoDTO;
-import com.shaffiro.service.dto.ReglaDTO;
+
 import io.netty.handler.codec.mqtt.MqttQoS;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.mqtt.MqttEndpoint;
-import io.vertx.mqtt.MqttServer;
 import io.vertx.mqtt.MqttTopicSubscription;
 import io.vertx.mqtt.messages.MqttPublishMessage;
 import io.vertx.mqtt.messages.MqttSubscribeMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 /**
  * @author Agustin Gambirassi
@@ -31,25 +20,21 @@ import java.util.stream.Collectors;
 @Service
 public class MQTTBrokerService {
     private static final Logger log = LoggerFactory.getLogger(MQTTBrokerService.class);
-    private final DispositivoService dispositivoService;
-    private final ReglaService reglaService;
-    private String clientID;
-    private String response;
+    private final ReglasEngineService reglasEngineService;
     private MqttEndpoint endpoint;
 
 
-    public MQTTBrokerService(DispositivoService dispositivoService, ReglaService reglaService) {
-        this.dispositivoService = dispositivoService;
-        this.reglaService = reglaService;
+
+    public MQTTBrokerService(ReglasEngineService reglasEngineService) {
+        this.reglasEngineService = reglasEngineService;
     }
 
     public void handler(MqttEndpoint mqttEndpoint) {
         try {
             this.endpoint = mqttEndpoint;
-            response = "0";
             log.debug("MQTT client [" + mqttEndpoint.clientIdentifier() + "] request to connect, clean session = "
                 + mqttEndpoint.isCleanSession());
-            clientID = mqttEndpoint.clientIdentifier();
+            String clientID = mqttEndpoint.clientIdentifier();
             log.debug("[keep alive timeout = " + mqttEndpoint.keepAliveTimeSeconds() + "]");
             mqttEndpoint.accept(true);
 //            .publish("actuador/2/accion",
@@ -85,7 +70,7 @@ public class MQTTBrokerService {
     private void handle(MqttPublishMessage message) {
         log.debug("Received message [" + message.payload().toString() + "] from " /*+ message.clientID*/);
 
-        publish(message);
+        publish(reglasEngineService.processMessage(message));
 
     }
 
