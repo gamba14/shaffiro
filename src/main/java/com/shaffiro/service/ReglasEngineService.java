@@ -26,16 +26,44 @@ public class ReglasEngineService {
         this.dispositivoService = dispositivoService;
     }
 
-    public MqttPublishMessage processMessage(MqttPublishMessage inMsg){
+    public MqttPublishMessage processMessage(MqttPublishMessage inMsg) {
 
         process(inMsg);
         return inMsg;
     }
 
-    private void process(MqttPublishMessage inMsg){
+    private void process(MqttPublishMessage inMsg) {
         Long id = Long.parseLong("1");
-        Optional<DispositivoDTO> dispositivoDTO= dispositivoService.findOne(id);
+        Optional<DispositivoDTO> dispositivoDTO = dispositivoService.findOne(id);
         Optional<Set<ReglaDTO>> reglaDTOSet = Optional.of(dispositivoDTO.get().getReglas());
+        for (ReglaDTO regla : reglaDTOSet.get()) {
+            log.debug("Regla encontrada " + regla.toString());
+            Integer valorSeteado = Integer.parseInt(regla.getValor());
+            Integer valorMedido = Integer.parseInt(inMsg.payload().toString());
+            switch (regla.getOperador()) {
+                case ">":
+                    if (valorMedido > valorSeteado) {
+
+                    }
+                    break;
+                case "<":
+                    if (valorMedido < valorSeteado) {
+
+                    }
+                    break;
+                case ">=":
+                    if (valorMedido >= valorSeteado) {
+
+                    }
+                    break;
+                case "<=":
+                    if (valorMedido <= valorSeteado) {
+
+                    }
+                    break;
+            }
+
+        }
 
     }
 }

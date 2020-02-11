@@ -1,0 +1,10 @@
+{
+    "shaffiroApp": {
+        "Unidad": {
+            "null": "",
+            "CELSIUS": "CELSIUS",
+            "AMPERE": "AMPERE",
+            "LUMENES": "LUMENES"
+        }
+    }
+}
