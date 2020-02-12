@@ -10,7 +10,7 @@ export interface IRegla {
     unidad?: Unidad;
     valor?: string;
     operador?: string;
-    dispositivoAsociadoId?: number;
+    dispositivoId?: number;
 }
 
 export class Regla implements IRegla {
@@ -20,6 +20,6 @@ export class Regla implements IRegla {
         public unidad?: Unidad,
         public valor?: string,
         public operador?: string,
-        public dispositivoAsociadoId?: number
+        public dispositivoId?: number
     ) {}
 }

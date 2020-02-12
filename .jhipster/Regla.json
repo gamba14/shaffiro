@@ -3,7 +3,7 @@
     "clientRootFolder": "",
     "relationships": [
         {
-            "relationshipName": "dispositivoAsociado",
+            "relationshipName": "dispositivo",
             "otherEntityName": "dispositivo",
             "relationshipType": "many-to-one",
             "otherEntityField": "id",

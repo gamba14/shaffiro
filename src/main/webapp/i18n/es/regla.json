@@ -19,7 +19,7 @@
             "unidad": "Unidad",
             "valor": "Valor",
             "operador": "Operador",
-            "dispositivoAsociado": "Dispositivo Asociado"
+            "dispositivo": "Dispositivo"
         }
     }
 }

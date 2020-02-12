@@ -356,20 +356,20 @@ public class ReglaResourceIntTest {
 
     @Test
     @Transactional
-    public void getAllReglasByDispositivoAsociadoIsEqualToSomething() throws Exception {
+    public void getAllReglasByDispositivoIsEqualToSomething() throws Exception {
         // Initialize the database
-        Dispositivo dispositivoAsociado = DispositivoResourceIntTest.createEntity(em);
-        em.persist(dispositivoAsociado);
+        Dispositivo dispositivo = DispositivoResourceIntTest.createEntity(em);
+        em.persist(dispositivo);
         em.flush();
-        regla.setDispositivoAsociado(dispositivoAsociado);
+        regla.setDispositivo(dispositivo);
         reglaRepository.saveAndFlush(regla);
-        Long dispositivoAsociadoId = dispositivoAsociado.getId();
+        Long dispositivoId = dispositivo.getId();
 
-        // Get all the reglaList where dispositivoAsociado equals to dispositivoAsociadoId
-        defaultReglaShouldBeFound("dispositivoAsociadoId.equals=" + dispositivoAsociadoId);
+        // Get all the reglaList where dispositivo equals to dispositivoId
+        defaultReglaShouldBeFound("dispositivoId.equals=" + dispositivoId);
 
-        // Get all the reglaList where dispositivoAsociado equals to dispositivoAsociadoId + 1
-        defaultReglaShouldNotBeFound("dispositivoAsociadoId.equals=" + (dispositivoAsociadoId + 1));
+        // Get all the reglaList where dispositivo equals to dispositivoId + 1
+        defaultReglaShouldNotBeFound("dispositivoId.equals=" + (dispositivoId + 1));
     }
 
     /**

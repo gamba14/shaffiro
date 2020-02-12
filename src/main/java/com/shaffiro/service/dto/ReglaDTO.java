@@ -19,7 +19,7 @@ public class ReglaDTO implements Serializable {
     private String operador;
 
 
-    private Long dispositivoAsociadoId;
+    private Long dispositivoId;
 
     public Long getId() {
         return id;
@@ -61,12 +61,12 @@ public class ReglaDTO implements Serializable {
         this.operador = operador;
     }
 
-    public Long getDispositivoAsociadoId() {
-        return dispositivoAsociadoId;
+    public Long getDispositivoId() {
+        return dispositivoId;
     }
 
-    public void setDispositivoAsociadoId(Long dispositivoId) {
-        this.dispositivoAsociadoId = dispositivoId;
+    public void setDispositivoId(Long dispositivoId) {
+        this.dispositivoId = dispositivoId;
     }
 
     @Override
@@ -98,7 +98,7 @@ public class ReglaDTO implements Serializable {
             ", unidad='" + getUnidad() + "'" +
             ", valor='" + getValor() + "'" +
             ", operador='" + getOperador() + "'" +
-            ", dispositivoAsociado=" + getDispositivoAsociadoId() +
+            ", dispositivo=" + getDispositivoId() +
             "}";
     }
 }

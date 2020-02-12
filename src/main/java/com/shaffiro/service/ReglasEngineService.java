@@ -1,5 +1,6 @@
 package com.shaffiro.service;
 
+import com.shaffiro.domain.Regla;
 import com.shaffiro.service.dto.DispositivoDTO;
 import com.shaffiro.service.dto.ReglaDTO;
 import io.netty.buffer.ByteBuf;
@@ -37,8 +38,8 @@ public class ReglasEngineService {
         Long id = Long.parseLong("1");
         MqttPublishMessage response;
         Optional<DispositivoDTO> dispositivoDTO = dispositivoService.findOne(id);
-        Optional<Set<ReglaDTO>> reglaDTOSet = Optional.of(dispositivoDTO.get().getReglas());
-        for (ReglaDTO regla : reglaDTOSet.get()) {
+        Optional<Set<Regla>> reglaDTOSet = Optional.of(dispositivoDTO.get().getReglas());
+        for (Regla regla : reglaDTOSet.get()) {
             log.debug("Regla encontrada " + regla.toString());
             Integer valorSeteado = Integer.parseInt(regla.getValor());
             Integer valorMedido = Integer.parseInt(inMsg.payload().toString());

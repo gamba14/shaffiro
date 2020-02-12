@@ -21,10 +21,10 @@
                 <dd>
                     <span>{{regla.operador}}</span>
                 </dd>
-                <dt><span jhiTranslate="shaffiroApp.regla.dispositivoAsociado">Dispositivo Asociado</span></dt>
+                <dt><span jhiTranslate="shaffiroApp.regla.dispositivo">Dispositivo</span></dt>
                 <dd>
-                    <div *ngIf="regla.dispositivoAsociadoId">
-                        <a [routerLink]="['/dispositivo', regla.dispositivoAsociadoId, 'view']">{{regla.dispositivoAsociadoId}}</a>
+                    <div *ngIf="regla.dispositivoId">
+                        <a [routerLink]="['/dispositivo', regla.dispositivoId, 'view']">{{regla.dispositivoId}}</a>
                     </div>
                 </dd>
             </dl>

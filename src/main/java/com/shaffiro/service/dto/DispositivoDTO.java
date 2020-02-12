@@ -3,6 +3,7 @@ import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
 
+import com.shaffiro.domain.Regla;
 import com.shaffiro.domain.enumeration.TipoDispositivo;
 
 /**
@@ -20,8 +21,7 @@ public class DispositivoDTO implements Serializable {
 
     private String configuracion;
 
-    private Set<ReglaDTO> reglas;
-
+    private Set<Regla> reglas;
 
     public Long getId() {
         return id;
@@ -63,11 +63,11 @@ public class DispositivoDTO implements Serializable {
         this.configuracion = configuracion;
     }
 
-    public Set<ReglaDTO> getReglas() {
+    public Set<Regla> getReglas() {
         return reglas;
     }
 
-    public void setReglas(Set<ReglaDTO> reglas) {
+    public void setReglas(Set<Regla> reglas) {
         this.reglas = reglas;
     }
 

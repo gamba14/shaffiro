@@ -11,10 +11,10 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring", uses = {DispositivoMapper.class})
 public interface ReglaMapper extends EntityMapper<ReglaDTO, Regla> {
 
-    @Mapping(source = "dispositivoAsociado.id", target = "dispositivoAsociadoId")
+    @Mapping(source = "dispositivo.id", target = "dispositivoId")
     ReglaDTO toDto(Regla regla);
 
-    @Mapping(source = "dispositivoAsociadoId", target = "dispositivoAsociado")
+    @Mapping(source = "dispositivoId", target = "dispositivo")
     Regla toEntity(ReglaDTO reglaDTO);
 
     default Regla fromId(Long id) {

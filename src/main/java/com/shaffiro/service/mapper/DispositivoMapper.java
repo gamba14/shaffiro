@@ -11,6 +11,7 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring", uses = {})
 public interface DispositivoMapper extends EntityMapper<DispositivoDTO, Dispositivo> {
 
+    DispositivoDTO toDto(Dispositivo dispositivo);
 
     @Mapping(target = "reglas", ignore = true)
     Dispositivo toEntity(DispositivoDTO dispositivoDTO);

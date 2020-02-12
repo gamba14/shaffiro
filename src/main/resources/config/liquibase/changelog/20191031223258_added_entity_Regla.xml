@@ -38,7 +38,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="dispositivo_asociado_id" type="bigint">
+            <column name="dispositivo_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 

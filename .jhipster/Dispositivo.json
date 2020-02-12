@@ -6,7 +6,7 @@
             "relationshipName": "regla",
             "otherEntityName": "regla",
             "relationshipType": "one-to-many",
-            "otherEntityRelationshipName": "dispositivoAsociado",
+            "otherEntityRelationshipName": "dispositivo",
             "otherEntityRelationshipNameUndefined": false
         }
     ],

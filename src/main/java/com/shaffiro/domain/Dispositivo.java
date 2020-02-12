@@ -23,7 +23,7 @@ import com.shaffiro.domain.enumeration.TipoDispositivo;
 public class Dispositivo implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -41,8 +41,8 @@ public class Dispositivo implements Serializable {
     @Column(name = "configuracion")
     private String configuracion;
 
-    @OneToMany(mappedBy = "dispositivoAsociado")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @OneToMany(mappedBy = "dispositivo")
+    //@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Regla> reglas = new HashSet<>();
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -116,13 +116,13 @@ public class Dispositivo implements Serializable {
 
     public Dispositivo addRegla(Regla regla) {
         this.reglas.add(regla);
-        regla.setDispositivoAsociado(this);
+        regla.setDispositivo(this);
         return this;
     }
 
     public Dispositivo removeRegla(Regla regla) {
         this.reglas.remove(regla);
-        regla.setDispositivoAsociado(null);
+        regla.setDispositivo(null);
         return this;
     }
 

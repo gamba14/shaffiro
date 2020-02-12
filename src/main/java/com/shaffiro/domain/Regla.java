@@ -41,7 +41,7 @@ public class Regla implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("reglas")
-    private Dispositivo dispositivoAsociado;
+    private Dispositivo dispositivo;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -104,17 +104,17 @@ public class Regla implements Serializable {
         this.operador = operador;
     }
 
-    public Dispositivo getDispositivoAsociado() {
-        return dispositivoAsociado;
+    public Dispositivo getDispositivo() {
+        return dispositivo;
     }
 
-    public Regla dispositivoAsociado(Dispositivo dispositivo) {
-        this.dispositivoAsociado = dispositivo;
+    public Regla dispositivo(Dispositivo dispositivo) {
+        this.dispositivo = dispositivo;
         return this;
     }
 
-    public void setDispositivoAsociado(Dispositivo dispositivo) {
-        this.dispositivoAsociado = dispositivo;
+    public void setDispositivo(Dispositivo dispositivo) {
+        this.dispositivo = dispositivo;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
