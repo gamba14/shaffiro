@@ -70,14 +70,14 @@ public class MQTTBrokerService {
     private void handle(MqttPublishMessage message) {
         log.debug("Received message [" + message.payload().toString() + "] from " /*+ message.clientID*/);
 
-        publish(reglasEngineService.processMessage(message));
+        publish(message,reglasEngineService.processMessage(message));
 
     }
 
-    private void publish(MqttPublishMessage message){
+    private void publish(MqttPublishMessage message, String payload){
         log.debug("Publicando mensaje para: " + message.topicName());
         log.debug("Contenido: " + message.payload().toString());
-        endpoint.publish(message.topicName(), Buffer.buffer("Respuesta desde server"), MqttQoS.AT_LEAST_ONCE,false,false);
+        endpoint.publish(message.topicName(), Buffer.buffer(payload), MqttQoS.AT_LEAST_ONCE,false,false);
     }
 
 }

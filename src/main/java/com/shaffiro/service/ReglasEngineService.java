@@ -2,6 +2,9 @@ package com.shaffiro.service;
 
 import com.shaffiro.service.dto.DispositivoDTO;
 import com.shaffiro.service.dto.ReglaDTO;
+import io.netty.buffer.ByteBuf;
+import io.netty.handler.codec.mqtt.MqttQoS;
+import io.vertx.core.buffer.Buffer;
 import io.vertx.mqtt.messages.MqttPublishMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,14 +29,13 @@ public class ReglasEngineService {
         this.dispositivoService = dispositivoService;
     }
 
-    public MqttPublishMessage processMessage(MqttPublishMessage inMsg) {
-
-        process(inMsg);
-        return inMsg;
+    public String processMessage(MqttPublishMessage inMsg) {
+        return process(inMsg);
     }
 
-    private void process(MqttPublishMessage inMsg) {
+    private String process(MqttPublishMessage inMsg) {
         Long id = Long.parseLong("1");
+        MqttPublishMessage response;
         Optional<DispositivoDTO> dispositivoDTO = dispositivoService.findOne(id);
         Optional<Set<ReglaDTO>> reglaDTOSet = Optional.of(dispositivoDTO.get().getReglas());
         for (ReglaDTO regla : reglaDTOSet.get()) {
@@ -43,27 +45,27 @@ public class ReglasEngineService {
             switch (regla.getOperador()) {
                 case ">":
                     if (valorMedido > valorSeteado) {
-
+                        return "0";
                     }
                     break;
                 case "<":
                     if (valorMedido < valorSeteado) {
-
+                        return "1";
                     }
                     break;
                 case ">=":
                     if (valorMedido >= valorSeteado) {
-
+                        return "0";
                     }
                     break;
                 case "<=":
                     if (valorMedido <= valorSeteado) {
-
+                        return "1";
                     }
                     break;
             }
 
         }
-
+        return "N";
     }
 }
