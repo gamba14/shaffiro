@@ -35,7 +35,9 @@ public class ReglasEngineService {
     }
 
     private String process(MqttPublishMessage inMsg) {
-        Long id = Long.parseLong("1");
+        // formato del topic /dispositivo/id
+        String[] topicParsed = inMsg.topicName().split("/");
+        Long id = Long.parseLong(topicParsed[2]);
         MqttPublishMessage response;
         Optional<DispositivoDTO> dispositivoDTO = dispositivoService.findOne(id);
         Optional<Set<Regla>> reglaDTOSet = Optional.of(dispositivoDTO.get().getReglas());
