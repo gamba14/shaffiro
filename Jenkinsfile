@@ -61,8 +61,7 @@ node {
     }
 
     stage('run locally'){
-        sh "docker stop gamba14/shaffiro"
-        sh "docker pull gamba14/shaffiro:latest"
-        sh "docker run -d -p 9000:8080 gamba14/shaffiro"
+        sh "docker-compose -f docker/app.yml stop"
+        sh "docker-compose -f docker/app.yml up -d "
     }
 }
