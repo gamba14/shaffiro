@@ -46,4 +46,17 @@ node {
         sh "./mvnw verify -Pprod -DskipTests"
         archiveArtifacts artifacts: '**/target/*.war', fingerprint: true
     }
+
+    def dockerImage
+    stage('build docker') {
+        sh "cp -R src/main/docker target/"
+        sh "cp target/*.war target/docker/"
+        dockerImage = docker.build('docker-login/shaffiro', 'target/docker')
+    }
+
+    stage('publish docker') {
+        docker.withRegistry('https://registry.hub.docker.com', 'docker-login') {
+            dockerImage.push 'latest'
+        }
+    }
 }
