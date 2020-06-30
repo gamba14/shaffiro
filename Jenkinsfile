@@ -22,15 +22,15 @@ node {
         sh "./mvnw com.github.eirslett:frontend-maven-plugin:npm"
     }
 
-    stage('backend tests') {
-        try {
-            sh "./mvnw test"
-        } catch(err) {
-            throw err
-        } finally {
-            junit '**/target/surefire-reports/TEST-*.xml'
-        }
-    }
+    // stage('backend tests') {
+    //     try {
+    //         sh "./mvnw test"
+    //     } catch(err) {
+    //         throw err
+    //     } finally {
+    //         junit '**/target/surefire-reports/TEST-*.xml'
+    //     }
+    // }
 
     stage('frontend tests') {
         try {
@@ -61,7 +61,7 @@ node {
     }
 
     stage('run locally'){
-        sh "docker-compose -f docker/app.yml stop"
-        sh "docker-compose -f docker/app.yml up -d "
+        sh "docker-compose -f /var/lib/jenkins/docker/app.yml stop"
+        sh "docker-compose -f /var/lib/jenkins/docker/app.yml up -d "
     }
 }
