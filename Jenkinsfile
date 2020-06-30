@@ -59,4 +59,10 @@ node {
             dockerImage.push 'latest'
         }
     }
+
+    stage('run locally'){
+        sh "docker stop gamba14/shaffiro"
+        sh "docker pull gamba14/shaffiro:latest"
+        sh "docker run -d -p 9000:8080 gamba14/shaffiro"
+    }
 }
