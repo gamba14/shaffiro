@@ -51,11 +51,11 @@ node {
     stage('build docker') {
         sh "cp -R src/main/docker target/"
         sh "cp target/*.war target/docker/"
-        dockerImage = docker.build('docker-login/shaffiro', 'target/docker')
+        dockerImage = docker.build('gamba14/shaffiro', 'target/docker')
     }
 
     stage('publish docker') {
-        docker.withRegistry('https://registry.hub.docker.com', 'docker-login') {
+        docker.withRegistry('https://registry.hub.docker.com', 'gamba14') {
             dockerImage.push 'latest'
         }
     }
