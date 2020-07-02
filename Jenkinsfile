@@ -5,6 +5,10 @@ node {
         checkout scm
     }
 
+    stage('stop service'){
+        sh "docker-compose -f /var/lib/jenkins/docker/app.yml stop"
+    }
+
     stage('check java') {
         sh "java -version"
     }
@@ -61,7 +65,6 @@ node {
     }
 
     stage('run locally'){
-        sh "docker-compose -f /var/lib/jenkins/docker/app.yml stop"
         sh "docker-compose -f /var/lib/jenkins/docker/app.yml up -d "
     }
 }

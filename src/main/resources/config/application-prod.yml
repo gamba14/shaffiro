@@ -60,15 +60,15 @@ spring:
         contexts: prod
     mail:
         host: smtp.gmail.com
-            port: 587
-            username: shaffirotest@gmail.com
-            password: shaffirotest123
-            protocol: smtp
-            tls: true
-            properties.mail.smtp:
-                auth: true
-                starttls.enable: true
-                ssl.trust: smtp.gmail.com
+        port: 587
+        username: shaffirotest@gmail.com
+        password: shaffirotest123
+        protocol: smtp
+        tls: true
+        properties.mail.smtp:
+            auth: true
+            starttls.enable: true
+            ssl.trust: smtp.gmail.com
     thymeleaf:
         cache: true
     sleuth:
