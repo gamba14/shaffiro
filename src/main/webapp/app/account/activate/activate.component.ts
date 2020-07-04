@@ -22,6 +22,7 @@ export class ActivateComponent implements OnInit {
                 () => {
                     this.error = null;
                     this.success = 'OK';
+                    window.location.href = 'https://shaffiro.morlax.com.ar/';
                 },
                 () => {
                     this.success = null;
