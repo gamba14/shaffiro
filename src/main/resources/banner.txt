@@ -1,10 +1,10 @@
 
-  ${AnsiColor.GREEN}      ██╗${AnsiColor.RED} ██╗   ██╗ ████████╗ ███████╗   ██████╗ ████████╗ ████████╗ ███████╗
-  ${AnsiColor.GREEN}      ██║${AnsiColor.RED} ██║   ██║ ╚══██╔══╝ ██╔═══██╗ ██╔════╝ ╚══██╔══╝ ██╔═════╝ ██╔═══██╗
-  ${AnsiColor.GREEN}      ██║${AnsiColor.RED} ████████║    ██║    ███████╔╝ ╚█████╗     ██║    ██████╗   ███████╔╝
-  ${AnsiColor.GREEN}██╗   ██║${AnsiColor.RED} ██╔═══██║    ██║    ██╔════╝   ╚═══██╗    ██║    ██╔═══╝   ██╔══██║
-  ${AnsiColor.GREEN}╚██████╔╝${AnsiColor.RED} ██║   ██║ ████████╗ ██║       ██████╔╝    ██║    ████████╗ ██║  ╚██╗
-  ${AnsiColor.GREEN} ╚═════╝ ${AnsiColor.RED} ╚═╝   ╚═╝ ╚═══════╝ ╚═╝       ╚═════╝     ╚═╝    ╚═══════╝ ╚═╝   ╚═╝
+${AnsiColor.GREEN}   _____ __          _________
+${AnsiColor.GREEN}  / ___// /_  ____ _/ __/ __(_)________
+${AnsiColor.GREEN}  \__ \/ __ \/ __ `/ /_/ /_/ / ___/ __ \
+${AnsiColor.GREEN} ___/ / / / / /_/ / __/ __/ / /  / /_/ /
+${AnsiColor.GREEN}/____/_/ /_/\__,_/_/ /_/ /_/_/   \____/
 
-${AnsiColor.BRIGHT_BLUE}:: JHipster 🤓  :: Running Spring Boot ${spring-boot.version} ::
-:: https://www.jhipster.tech ::${AnsiColor.DEFAULT}
+
+${AnsiColor.BRIGHT_BLUE}:: Shaffiro 🤓  :: Running Spring Boot ${spring-boot.version} ::
+:: https://www.shaffiro.morlax.com.ar ::${AnsiColor.DEFAULT}
