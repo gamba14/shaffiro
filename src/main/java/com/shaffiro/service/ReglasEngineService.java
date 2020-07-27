@@ -37,38 +37,39 @@ public class ReglasEngineService {
     private String process(MqttPublishMessage inMsg) {
         // formato del topic /dispositivo/id
         String[] topicParsed = inMsg.topicName().split("/");
-        Long id = Long.parseLong(topicParsed[2]);
-        MqttPublishMessage response;
-        Optional<DispositivoDTO> dispositivoDTO = dispositivoService.findOne(id);
-        Optional<Set<Regla>> reglaDTOSet = Optional.of(dispositivoDTO.get().getReglas());
-        for (Regla regla : reglaDTOSet.get()) {
-            log.debug("Regla encontrada " + regla.toString());
-            Integer valorSeteado = Integer.parseInt(regla.getValor());
-            Integer valorMedido = Integer.parseInt(inMsg.payload().toString());
-            switch (regla.getOperador()) {
-                case ">":
-                    if (valorMedido > valorSeteado) {
-                        return "0";
-                    }
-                    break;
-                case "<":
-                    if (valorMedido < valorSeteado) {
-                        return "1";
-                    }
-                    break;
-                case ">=":
-                    if (valorMedido >= valorSeteado) {
-                        return "0";
-                    }
-                    break;
-                case "<=":
-                    if (valorMedido <= valorSeteado) {
-                        return "1";
-                    }
-                    break;
-            }
-
-        }
-        return "N";
+//        Long id = Long.parseLong(topicParsed[2]);
+//        MqttPublishMessage response;
+//        Optional<DispositivoDTO> dispositivoDTO = dispositivoService.findOne(id);
+////        Optional<Set<Regla>> reglaDTOSet = Optional.of(dispositivoDTO.get().getReglas());
+//        for (Regla regla : reglaDTOSet.get()) {
+//            log.debug("Regla encontrada " + regla.toString());
+//            Integer valorSeteado = Integer.parseInt(regla.getValor());
+//            Integer valorMedido = Integer.parseInt(inMsg.payload().toString());
+//            switch (regla.getOperador()) {
+//                case ">":
+//                    if (valorMedido > valorSeteado) {
+//                        return "0";
+//                    }
+//                    break;
+//                case "<":
+//                    if (valorMedido < valorSeteado) {
+//                        return "1";
+//                    }
+//                    break;
+//                case ">=":
+//                    if (valorMedido >= valorSeteado) {
+//                        return "0";
+//                    }
+//                    break;
+//                case "<=":
+//                    if (valorMedido <= valorSeteado) {
+//                        return "1";
+//                    }
+//                    break;
+//            }
+//
+//        }
+//        return "N";
+        return "nada";
     }
 }

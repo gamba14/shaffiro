@@ -21,7 +21,7 @@ describe('Service Tests', () => {
             service = injector.get(DispositivoService);
             httpMock = injector.get(HttpTestingController);
 
-            elemDefault = new Dispositivo(0, 'AAAAAAA', TipoDispositivo.SENSOR, false, 'AAAAAAA');
+            elemDefault = new Dispositivo(0, 'AAAAAAA', TipoDispositivo.SENSOR, false, 'AAAAAAA', 0);
         });
 
         describe('Service methods', async () => {
@@ -58,7 +58,8 @@ describe('Service Tests', () => {
                         nombre: 'BBBBBB',
                         tipo: 'BBBBBB',
                         activo: true,
-                        configuracion: 'BBBBBB'
+                        configuracion: 'BBBBBB',
+                        puerto: 1
                     },
                     elemDefault
                 );
@@ -78,7 +79,8 @@ describe('Service Tests', () => {
                         nombre: 'BBBBBB',
                         tipo: 'BBBBBB',
                         activo: true,
-                        configuracion: 'BBBBBB'
+                        configuracion: 'BBBBBB',
+                        puerto: 1
                     },
                     elemDefault
                 );

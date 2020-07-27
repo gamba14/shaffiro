@@ -31,6 +31,9 @@ public class DispositivoNoAsociado implements Serializable {
     @Column(name = "uuid")
     private String uuid;
 
+    @Column(name = "puerto")
+    private Integer puerto;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -65,6 +68,19 @@ public class DispositivoNoAsociado implements Serializable {
     public void setUuid(String uuid) {
         this.uuid = uuid;
     }
+
+    public Integer getPuerto() {
+        return puerto;
+    }
+
+    public DispositivoNoAsociado puerto(Integer puerto) {
+        this.puerto = puerto;
+        return this;
+    }
+
+    public void setPuerto(Integer puerto) {
+        this.puerto = puerto;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -93,6 +109,7 @@ public class DispositivoNoAsociado implements Serializable {
             "id=" + getId() +
             ", mac='" + getMac() + "'" +
             ", uuid='" + getUuid() + "'" +
+            ", puerto=" + getPuerto() +
             "}";
     }
 }

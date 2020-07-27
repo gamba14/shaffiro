@@ -23,7 +23,7 @@ import com.shaffiro.domain.enumeration.TipoDispositivo;
 public class Dispositivo implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -41,8 +41,11 @@ public class Dispositivo implements Serializable {
     @Column(name = "configuracion")
     private String configuracion;
 
+    @Column(name = "puerto")
+    private Integer puerto;
+
     @OneToMany(mappedBy = "dispositivo")
-    //@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Regla> reglas = new HashSet<>();
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -105,6 +108,19 @@ public class Dispositivo implements Serializable {
         this.configuracion = configuracion;
     }
 
+    public Integer getPuerto() {
+        return puerto;
+    }
+
+    public Dispositivo puerto(Integer puerto) {
+        this.puerto = puerto;
+        return this;
+    }
+
+    public void setPuerto(Integer puerto) {
+        this.puerto = puerto;
+    }
+
     public Set<Regla> getReglas() {
         return reglas;
     }
@@ -159,6 +175,7 @@ public class Dispositivo implements Serializable {
             ", tipo='" + getTipo() + "'" +
             ", activo='" + isActivo() + "'" +
             ", configuracion='" + getConfiguracion() + "'" +
+            ", puerto=" + getPuerto() +
             "}";
     }
 }

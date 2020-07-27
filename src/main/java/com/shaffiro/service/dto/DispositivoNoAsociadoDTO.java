@@ -15,6 +15,8 @@ public class DispositivoNoAsociadoDTO implements Serializable {
 
     private String uuid;
 
+    private Integer puerto;
+
 
     public Long getId() {
         return id;
@@ -38,6 +40,14 @@ public class DispositivoNoAsociadoDTO implements Serializable {
 
     public void setUuid(String uuid) {
         this.uuid = uuid;
+    }
+
+    public Integer getPuerto() {
+        return puerto;
+    }
+
+    public void setPuerto(Integer puerto) {
+        this.puerto = puerto;
     }
 
     @Override
@@ -67,6 +77,7 @@ public class DispositivoNoAsociadoDTO implements Serializable {
             "id=" + getId() +
             ", mac='" + getMac() + "'" +
             ", uuid='" + getUuid() + "'" +
+            ", puerto=" + getPuerto() +
             "}";
     }
 }

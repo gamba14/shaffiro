@@ -16,7 +16,8 @@
                 "title": "Dispositivo No Asociado"
             },
             "mac": "Mac",
-            "uuid": "Uuid"
+            "uuid": "Uuid",
+            "puerto": "Puerto"
         }
     }
 }

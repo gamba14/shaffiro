@@ -21,7 +21,7 @@ describe('Service Tests', () => {
             service = injector.get(DispositivoNoAsociadoService);
             httpMock = injector.get(HttpTestingController);
 
-            elemDefault = new DispositivoNoAsociado(0, 'AAAAAAA', 'AAAAAAA');
+            elemDefault = new DispositivoNoAsociado(0, 'AAAAAAA', 'AAAAAAA', 0);
         });
 
         describe('Service methods', async () => {
@@ -56,7 +56,8 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         mac: 'BBBBBB',
-                        uuid: 'BBBBBB'
+                        uuid: 'BBBBBB',
+                        puerto: 1
                     },
                     elemDefault
                 );
@@ -74,7 +75,8 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         mac: 'BBBBBB',
-                        uuid: 'BBBBBB'
+                        uuid: 'BBBBBB',
+                        puerto: 1
                     },
                     elemDefault
                 );

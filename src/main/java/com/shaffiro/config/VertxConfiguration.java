@@ -20,11 +20,14 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class VertxConfiguration {
     private final Logger log = LoggerFactory.getLogger(VertxConfiguration.class);
-    @Autowired
-    private DiscoveryService discoveryService;
+    private final DiscoveryService discoveryService;
+
+    public VertxConfiguration(DiscoveryService discoveryService) {
+        this.discoveryService = discoveryService;
+    }
 
     @Bean
-    public HttpServer init(){
+    public HttpServer init() {
         log.debug("Discovery service is listening on port 6788 TCP");
         Vertx vertx = Vertx.vertx();
         Router router = Router.router(vertx);
@@ -47,7 +50,8 @@ public class VertxConfiguration {
         socket.listen(6789, "0.0.0.0", asyncResult -> {
             if (asyncResult.succeeded()) {
                 socket.handler(discoveryService::handleUDP);
-            };
+            }
+            ;
         });
 
         return socket;

@@ -17,6 +17,7 @@
             <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="shaffiroApp.dispositivoNoAsociado.mac">Mac</span></th>
             <th><span jhiTranslate="shaffiroApp.dispositivoNoAsociado.uuid">Uuid</span></th>
+            <th><span jhiTranslate="shaffiroApp.dispositivoNoAsociado.puerto">Puerto</span></th>
             <th></th>
             </tr>
             </thead>
@@ -25,6 +26,7 @@
                 <td><a [routerLink]="['/dispositivo-no-asociado', dispositivoNoAsociado.id, 'view' ]">{{dispositivoNoAsociado.id}}</a></td>
                 <td>{{dispositivoNoAsociado.mac}}</td>
                 <td>{{dispositivoNoAsociado.uuid}}</td>
+                <td>{{dispositivoNoAsociado.puerto}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

@@ -1,5 +1,9 @@
 package com.shaffiro.web.rest;
+import com.shaffiro.domain.Config;
 import com.shaffiro.service.DispositivoNoAsociadoService;
+import com.shaffiro.service.DispositivoService;
+import com.shaffiro.service.dto.DispositivoDTO;
+import com.shaffiro.service.mapper.DispositivoMapper;
 import com.shaffiro.web.rest.errors.BadRequestAlertException;
 import com.shaffiro.web.rest.util.HeaderUtil;
 import com.shaffiro.service.dto.DispositivoNoAsociadoDTO;
@@ -29,8 +33,12 @@ public class DispositivoNoAsociadoResource {
 
     private final DispositivoNoAsociadoService dispositivoNoAsociadoService;
 
-    public DispositivoNoAsociadoResource(DispositivoNoAsociadoService dispositivoNoAsociadoService) {
+    private final DispositivoService dispositivoService;
+
+
+    public DispositivoNoAsociadoResource(DispositivoNoAsociadoService dispositivoNoAsociadoService, DispositivoService dispositivoService) {
         this.dispositivoNoAsociadoService = dispositivoNoAsociadoService;
+        this.dispositivoService = dispositivoService;
     }
 
     /**
@@ -107,6 +115,24 @@ public class DispositivoNoAsociadoResource {
     public ResponseEntity<Void> deleteDispositivoNoAsociado(@PathVariable Long id) {
         log.debug("REST request to delete DispositivoNoAsociado : {}", id);
         dispositivoNoAsociadoService.delete(id);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+    @PostMapping("/dispositivo-no-asociado/pair/{id}")
+    public ResponseEntity<Void> pairDispositivoNoAsociado(@PathVariable Long id, @RequestBody Config config){
+        log.debug("Request to pair device {}", id);
+        //find non paired device
+        Optional<DispositivoNoAsociadoDTO> optionalDispositivoNoAsociadoDTO = dispositivoNoAsociadoService.findOne(id);
+        DispositivoNoAsociadoDTO dispositivoNoAsociadoDTO = optionalDispositivoNoAsociadoDTO.get();
+        DispositivoDTO dispositivoDTO = new DispositivoDTO();
+        dispositivoDTO.setPuerto(dispositivoDTO.getPuerto());
+        dispositivoDTO.setActivo(true);
+        dispositivoDTO.setPuerto(dispositivoNoAsociadoDTO.getPuerto());
+        dispositivoDTO.setConfiguracion(config.getConfiguracion());
+        dispositivoDTO.setNombre(config.getNombre());
+        dispositivoService.save(dispositivoDTO);
+        dispositivoNoAsociadoService.delete(id);
+
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 }

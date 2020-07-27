@@ -12,7 +12,13 @@
             "fieldName": "uuid",
             "fieldType": "String",
             "fieldValidateRules": []
+        },
+        {
+            "fieldName": "puerto",
+            "fieldType": "Integer",
+            "fieldValidateRules": []
         }
+        
     ],
     "changelogDate": "20191014015443",
     "dto": "mapstruct",

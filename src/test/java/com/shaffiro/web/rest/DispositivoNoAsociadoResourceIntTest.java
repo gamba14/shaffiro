@@ -5,6 +5,7 @@ import com.shaffiro.ShaffiroApp;
 import com.shaffiro.domain.DispositivoNoAsociado;
 import com.shaffiro.repository.DispositivoNoAsociadoRepository;
 import com.shaffiro.service.DispositivoNoAsociadoService;
+import com.shaffiro.service.DispositivoService;
 import com.shaffiro.service.dto.DispositivoNoAsociadoDTO;
 import com.shaffiro.service.mapper.DispositivoNoAsociadoMapper;
 import com.shaffiro.web.rest.errors.ExceptionTranslator;
@@ -49,6 +50,9 @@ public class DispositivoNoAsociadoResourceIntTest {
     private static final String DEFAULT_UUID = "AAAAAAAAAA";
     private static final String UPDATED_UUID = "BBBBBBBBBB";
 
+    private static final Integer DEFAULT_PUERTO = 1;
+    private static final Integer UPDATED_PUERTO = 2;
+
     @Autowired
     private DispositivoNoAsociadoRepository dispositivoNoAsociadoRepository;
 
@@ -60,6 +64,9 @@ public class DispositivoNoAsociadoResourceIntTest {
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
+
+    @Autowired
+    private DispositivoService dispositivoService;
 
     @Autowired
     private PageableHandlerMethodArgumentResolver pageableArgumentResolver;
@@ -80,7 +87,7 @@ public class DispositivoNoAsociadoResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final DispositivoNoAsociadoResource dispositivoNoAsociadoResource = new DispositivoNoAsociadoResource(dispositivoNoAsociadoService);
+        final DispositivoNoAsociadoResource dispositivoNoAsociadoResource = new DispositivoNoAsociadoResource(dispositivoNoAsociadoService, dispositivoService);
         this.restDispositivoNoAsociadoMockMvc = MockMvcBuilders.standaloneSetup(dispositivoNoAsociadoResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -98,7 +105,8 @@ public class DispositivoNoAsociadoResourceIntTest {
     public static DispositivoNoAsociado createEntity(EntityManager em) {
         DispositivoNoAsociado dispositivoNoAsociado = new DispositivoNoAsociado()
             .mac(DEFAULT_MAC)
-            .uuid(DEFAULT_UUID);
+            .uuid(DEFAULT_UUID)
+            .puerto(DEFAULT_PUERTO);
         return dispositivoNoAsociado;
     }
 
@@ -125,6 +133,7 @@ public class DispositivoNoAsociadoResourceIntTest {
         DispositivoNoAsociado testDispositivoNoAsociado = dispositivoNoAsociadoList.get(dispositivoNoAsociadoList.size() - 1);
         assertThat(testDispositivoNoAsociado.getMac()).isEqualTo(DEFAULT_MAC);
         assertThat(testDispositivoNoAsociado.getUuid()).isEqualTo(DEFAULT_UUID);
+        assertThat(testDispositivoNoAsociado.getPuerto()).isEqualTo(DEFAULT_PUERTO);
     }
 
     @Test
@@ -159,9 +168,10 @@ public class DispositivoNoAsociadoResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(dispositivoNoAsociado.getId().intValue())))
             .andExpect(jsonPath("$.[*].mac").value(hasItem(DEFAULT_MAC.toString())))
-            .andExpect(jsonPath("$.[*].uuid").value(hasItem(DEFAULT_UUID.toString())));
+            .andExpect(jsonPath("$.[*].uuid").value(hasItem(DEFAULT_UUID.toString())))
+            .andExpect(jsonPath("$.[*].puerto").value(hasItem(DEFAULT_PUERTO)));
     }
-    
+
     @Test
     @Transactional
     public void getDispositivoNoAsociado() throws Exception {
@@ -174,7 +184,8 @@ public class DispositivoNoAsociadoResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(dispositivoNoAsociado.getId().intValue()))
             .andExpect(jsonPath("$.mac").value(DEFAULT_MAC.toString()))
-            .andExpect(jsonPath("$.uuid").value(DEFAULT_UUID.toString()));
+            .andExpect(jsonPath("$.uuid").value(DEFAULT_UUID.toString()))
+            .andExpect(jsonPath("$.puerto").value(DEFAULT_PUERTO));
     }
 
     @Test
@@ -199,7 +210,8 @@ public class DispositivoNoAsociadoResourceIntTest {
         em.detach(updatedDispositivoNoAsociado);
         updatedDispositivoNoAsociado
             .mac(UPDATED_MAC)
-            .uuid(UPDATED_UUID);
+            .uuid(UPDATED_UUID)
+            .puerto(UPDATED_PUERTO);
         DispositivoNoAsociadoDTO dispositivoNoAsociadoDTO = dispositivoNoAsociadoMapper.toDto(updatedDispositivoNoAsociado);
 
         restDispositivoNoAsociadoMockMvc.perform(put("/api/dispositivo-no-asociados")
@@ -213,6 +225,7 @@ public class DispositivoNoAsociadoResourceIntTest {
         DispositivoNoAsociado testDispositivoNoAsociado = dispositivoNoAsociadoList.get(dispositivoNoAsociadoList.size() - 1);
         assertThat(testDispositivoNoAsociado.getMac()).isEqualTo(UPDATED_MAC);
         assertThat(testDispositivoNoAsociado.getUuid()).isEqualTo(UPDATED_UUID);
+        assertThat(testDispositivoNoAsociado.getPuerto()).isEqualTo(UPDATED_PUERTO);
     }
 
     @Test

@@ -56,6 +56,9 @@ public class DispositivoResourceIntTest {
     private static final String DEFAULT_CONFIGURACION = "AAAAAAAAAA";
     private static final String UPDATED_CONFIGURACION = "BBBBBBBBBB";
 
+    private static final Integer DEFAULT_PUERTO = 1;
+    private static final Integer UPDATED_PUERTO = 2;
+
     @Autowired
     private DispositivoRepository dispositivoRepository;
 
@@ -107,7 +110,8 @@ public class DispositivoResourceIntTest {
             .nombre(DEFAULT_NOMBRE)
             .tipo(DEFAULT_TIPO)
             .activo(DEFAULT_ACTIVO)
-            .configuracion(DEFAULT_CONFIGURACION);
+            .configuracion(DEFAULT_CONFIGURACION)
+            .puerto(DEFAULT_PUERTO);
         return dispositivo;
     }
 
@@ -136,6 +140,7 @@ public class DispositivoResourceIntTest {
         assertThat(testDispositivo.getTipo()).isEqualTo(DEFAULT_TIPO);
         assertThat(testDispositivo.isActivo()).isEqualTo(DEFAULT_ACTIVO);
         assertThat(testDispositivo.getConfiguracion()).isEqualTo(DEFAULT_CONFIGURACION);
+        assertThat(testDispositivo.getPuerto()).isEqualTo(DEFAULT_PUERTO);
     }
 
     @Test
@@ -172,7 +177,8 @@ public class DispositivoResourceIntTest {
             .andExpect(jsonPath("$.[*].nombre").value(hasItem(DEFAULT_NOMBRE.toString())))
             .andExpect(jsonPath("$.[*].tipo").value(hasItem(DEFAULT_TIPO.toString())))
             .andExpect(jsonPath("$.[*].activo").value(hasItem(DEFAULT_ACTIVO.booleanValue())))
-            .andExpect(jsonPath("$.[*].configuracion").value(hasItem(DEFAULT_CONFIGURACION.toString())));
+            .andExpect(jsonPath("$.[*].configuracion").value(hasItem(DEFAULT_CONFIGURACION.toString())))
+            .andExpect(jsonPath("$.[*].puerto").value(hasItem(DEFAULT_PUERTO)));
     }
     
     @Test
@@ -189,7 +195,8 @@ public class DispositivoResourceIntTest {
             .andExpect(jsonPath("$.nombre").value(DEFAULT_NOMBRE.toString()))
             .andExpect(jsonPath("$.tipo").value(DEFAULT_TIPO.toString()))
             .andExpect(jsonPath("$.activo").value(DEFAULT_ACTIVO.booleanValue()))
-            .andExpect(jsonPath("$.configuracion").value(DEFAULT_CONFIGURACION.toString()));
+            .andExpect(jsonPath("$.configuracion").value(DEFAULT_CONFIGURACION.toString()))
+            .andExpect(jsonPath("$.puerto").value(DEFAULT_PUERTO));
     }
 
     @Test
@@ -216,7 +223,8 @@ public class DispositivoResourceIntTest {
             .nombre(UPDATED_NOMBRE)
             .tipo(UPDATED_TIPO)
             .activo(UPDATED_ACTIVO)
-            .configuracion(UPDATED_CONFIGURACION);
+            .configuracion(UPDATED_CONFIGURACION)
+            .puerto(UPDATED_PUERTO);
         DispositivoDTO dispositivoDTO = dispositivoMapper.toDto(updatedDispositivo);
 
         restDispositivoMockMvc.perform(put("/api/dispositivos")
@@ -232,6 +240,7 @@ public class DispositivoResourceIntTest {
         assertThat(testDispositivo.getTipo()).isEqualTo(UPDATED_TIPO);
         assertThat(testDispositivo.isActivo()).isEqualTo(UPDATED_ACTIVO);
         assertThat(testDispositivo.getConfiguracion()).isEqualTo(UPDATED_CONFIGURACION);
+        assertThat(testDispositivo.getPuerto()).isEqualTo(UPDATED_PUERTO);
     }
 
     @Test

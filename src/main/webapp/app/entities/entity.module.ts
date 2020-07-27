@@ -55,6 +55,14 @@ import { RouterModule } from '@angular/router';
             {
                 path: 'regla',
                 loadChildren: './regla/regla.module#ShaffiroReglaModule'
+            },
+            {
+                path: 'dispositivo',
+                loadChildren: './dispositivo/dispositivo.module#ShaffiroDispositivoModule'
+            },
+            {
+                path: 'dispositivo-no-asociado',
+                loadChildren: './dispositivo-no-asociado/dispositivo-no-asociado.module#ShaffiroDispositivoNoAsociadoModule'
             }
             /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
         ])

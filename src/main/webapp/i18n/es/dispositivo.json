@@ -19,6 +19,7 @@
             "tipo": "Tipo",
             "activo": "Activo",
             "configuracion": "Configuracion",
+            "puerto": "Puerto",
             "regla": "Regla"
         }
     }

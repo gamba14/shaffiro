@@ -11,6 +11,7 @@ export interface IDispositivo {
     tipo?: TipoDispositivo;
     activo?: boolean;
     configuracion?: string;
+    puerto?: number;
     reglas?: IRegla[];
 }
 
@@ -21,6 +22,7 @@ export class Dispositivo implements IDispositivo {
         public tipo?: TipoDispositivo,
         public activo?: boolean,
         public configuracion?: string,
+        public puerto?: number,
         public reglas?: IRegla[]
     ) {
         this.activo = this.activo || false;
