@@ -132,7 +132,8 @@ public class DispositivoNoAsociadoResource {
         dispositivoDTO.setNombre(config.getNombre());
         dispositivoService.save(dispositivoDTO);
         dispositivoNoAsociadoService.delete(id);
+        //enviarle la configuracion.
 
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, id.toString())).build();
     }
 }

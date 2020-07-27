@@ -43,6 +43,7 @@ public class DispositivoService {
         log.debug("Request to save Dispositivo : {}", dispositivoDTO);
         Dispositivo dispositivo = dispositivoMapper.toEntity(dispositivoDTO);
         dispositivo = dispositivoRepository.save(dispositivo);
+        //aca hay que mandar la configuracion al dispositivo.
         return dispositivoMapper.toDto(dispositivo);
     }
 
