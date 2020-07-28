@@ -89,7 +89,7 @@ public class DiscoveryService {
             byte[] buff = config.getBytes(Charset.defaultCharset());
             log.debug("IP TO SEND CONFIG: {}", ip);
             InetAddress address = InetAddress.getByName(ip);
-            DatagramSocket socket = new DatagramSocket(puerto);
+            DatagramSocket socket = new DatagramSocket();
             java.net.DatagramPacket packet = new java.net.DatagramPacket(buff, buff.length,address,puerto);
             socket.send(packet);
         }catch (Exception e){
