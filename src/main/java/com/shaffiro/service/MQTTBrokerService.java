@@ -75,8 +75,9 @@ public class MQTTBrokerService {
     }
 
     private void publish(MqttPublishMessage message, String payload){
-        log.debug("Publicando mensaje para: " + message.topicName());
+//        log.debug("Recibiendo mensaje de: " + message.topicName());
         log.debug("Contenido: " + message.payload().toString());
+        //llamar al motor de reglas
         endpoint.publish(message.topicName(), Buffer.buffer(payload), MqttQoS.AT_LEAST_ONCE,false,false);
     }
 
