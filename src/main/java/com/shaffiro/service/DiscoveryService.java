@@ -68,12 +68,15 @@ public class DiscoveryService {
         DispositivoNoAsociadoDTO dispositivoNoAsociado = new DispositivoNoAsociadoDTO();
         dispositivoNoAsociado.setMac(body.getJsonObject("dispositivo").getString("mac"));
         dispositivoNoAsociado.setUuid(body.getJsonObject("dispositivo").getString("uuid"));
+        dispositivoNoAsociado.setPuerto(body.getJsonObject("dispositivo").getInteger("puerto"));
         String ip = socket.sender().host();
         log.debug("IP: " +ip);
         //dispositivoNoAsociado.setUuid(body.getJsonObject("dispositivo").getString("uuid"));
         dispositivoNoAsociado.setUuid(ip);
+        boolean exists = dispositivoNoAsociadoList.stream()
+            .anyMatch(disp -> disp.getMac().equals(body.getJsonObject("dispositivo").getString("uuid")));
         try{
-            dispositivoNoAsociadoService.save(dispositivoNoAsociado);
+            if(!exists) dispositivoNoAsociadoService.save(dispositivoNoAsociado);
         }catch (Exception ex){
             ex.printStackTrace();
             log.error("Error al guardar dto");
