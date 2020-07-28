@@ -1,5 +1,9 @@
 package com.shaffiro.service;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.shaffiro.domain.DispositivoConfig;
 import com.shaffiro.service.dto.DispositivoNoAsociadoDTO;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
@@ -14,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.nio.charset.Charset;
@@ -29,6 +34,8 @@ public class DiscoveryService {
     private final Logger log = LoggerFactory.getLogger(DiscoveryService.class);
 
     private final DispositivoNoAsociadoService dispositivoNoAsociadoService;
+
+    private static final ObjectMapper mapper = createObjectMapper();
 
     private List<DispositivoNoAsociadoDTO> dispositivoNoAsociadoList;
 
@@ -84,9 +91,9 @@ public class DiscoveryService {
         }
     }
 
-    public void sendConfig(String config, String ip, Integer puerto){
+    public void sendConfig(DispositivoConfig config, String ip, Integer puerto){
         try {
-            byte[] buff = config.getBytes(Charset.defaultCharset());
+            byte[] buff = convertObjectToJsonBytes(config);
             log.debug("IP TO SEND CONFIG: {}", ip);
             InetAddress address = InetAddress.getByName(ip);
             DatagramSocket socket = new DatagramSocket();
@@ -99,6 +106,18 @@ public class DiscoveryService {
 
     private void sendError(int statusCode, HttpServerResponse response) {
         response.setStatusCode(statusCode).end();
+    }
+
+    private static ObjectMapper createObjectMapper() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+        mapper.registerModule(new JavaTimeModule());
+        return mapper;
+    }
+
+    public static byte[] convertObjectToJsonBytes(Object object)
+        throws IOException {
+        return mapper.writeValueAsBytes(object);
     }
 
 }

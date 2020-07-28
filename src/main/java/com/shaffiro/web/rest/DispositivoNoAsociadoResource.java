@@ -1,5 +1,6 @@
 package com.shaffiro.web.rest;
 import com.shaffiro.domain.Config;
+import com.shaffiro.domain.DispositivoConfig;
 import com.shaffiro.domain.enumeration.TipoDispositivo;
 import com.shaffiro.service.DiscoveryService;
 import com.shaffiro.service.DispositivoNoAsociadoService;
@@ -138,7 +139,11 @@ public class DispositivoNoAsociadoResource {
         dispositivoService.save(dispositivoDTO);
         dispositivoNoAsociadoService.delete(id);
         //enviarle la configuracion.
-        discoveryService.sendConfig(config.getConfiguracion(),dispositivoNoAsociadoDTO.getUuid(), dispositivoNoAsociadoDTO.getPuerto());
+        DispositivoConfig dispositivoConfig = new DispositivoConfig();
+        dispositivoConfig.setNombreDispositivo(config.getNombre());
+        dispositivoConfig.setTipoDispositivo(config.getTipo());
+        dispositivoConfig.setTopic("/" + config.getTipo() + "/" + id);
+        discoveryService.sendConfig(dispositivoConfig,dispositivoNoAsociadoDTO.getUuid(), dispositivoNoAsociadoDTO.getPuerto());
         return ResponseEntity.ok().headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, id.toString())).build();
     }
 }
