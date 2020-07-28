@@ -87,7 +87,7 @@ public class DispositivoNoAsociadoResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final DispositivoNoAsociadoResource dispositivoNoAsociadoResource = new DispositivoNoAsociadoResource(dispositivoNoAsociadoService, dispositivoService);
+        final DispositivoNoAsociadoResource dispositivoNoAsociadoResource = new DispositivoNoAsociadoResource(dispositivoNoAsociadoService, dispositivoService, discoveryService);
         this.restDispositivoNoAsociadoMockMvc = MockMvcBuilders.standaloneSetup(dispositivoNoAsociadoResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

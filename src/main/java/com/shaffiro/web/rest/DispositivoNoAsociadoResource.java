@@ -1,10 +1,10 @@
 package com.shaffiro.web.rest;
 import com.shaffiro.domain.Config;
 import com.shaffiro.domain.enumeration.TipoDispositivo;
+import com.shaffiro.service.DiscoveryService;
 import com.shaffiro.service.DispositivoNoAsociadoService;
 import com.shaffiro.service.DispositivoService;
 import com.shaffiro.service.dto.DispositivoDTO;
-import com.shaffiro.service.mapper.DispositivoMapper;
 import com.shaffiro.web.rest.errors.BadRequestAlertException;
 import com.shaffiro.web.rest.util.HeaderUtil;
 import com.shaffiro.service.dto.DispositivoNoAsociadoDTO;
@@ -36,10 +36,13 @@ public class DispositivoNoAsociadoResource {
 
     private final DispositivoService dispositivoService;
 
+    private final DiscoveryService discoveryService;
 
-    public DispositivoNoAsociadoResource(DispositivoNoAsociadoService dispositivoNoAsociadoService, DispositivoService dispositivoService) {
+
+    public DispositivoNoAsociadoResource(DispositivoNoAsociadoService dispositivoNoAsociadoService, DispositivoService dispositivoService, DiscoveryService discoveryService) {
         this.dispositivoNoAsociadoService = dispositivoNoAsociadoService;
         this.dispositivoService = dispositivoService;
+        this.discoveryService = discoveryService;
     }
 
     /**
@@ -135,7 +138,7 @@ public class DispositivoNoAsociadoResource {
         dispositivoService.save(dispositivoDTO);
         dispositivoNoAsociadoService.delete(id);
         //enviarle la configuracion.
-
+        discoveryService.sendConfig(config.getConfiguracion(),dispositivoNoAsociadoDTO.getUuid(), dispositivoNoAsociadoDTO.getPuerto());
         return ResponseEntity.ok().headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, id.toString())).build();
     }
 }

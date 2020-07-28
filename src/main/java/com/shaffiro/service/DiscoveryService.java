@@ -1,14 +1,22 @@
 package com.shaffiro.service;
 
 import com.shaffiro.service.dto.DispositivoNoAsociadoDTO;
+import io.vertx.core.AsyncResult;
+import io.vertx.core.Handler;
+import io.vertx.core.buffer.Buffer;
 import io.vertx.core.datagram.DatagramPacket;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.core.json.JsonObject;
+import io.vertx.core.net.SocketAddress;
+import io.vertx.core.streams.WriteStream;
 import io.vertx.ext.web.RoutingContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,7 +47,7 @@ public class DiscoveryService {
         dispositivoNoAsociado.setUuid(body.getJsonObject("dispositivo").getString("uuid"));
         dispositivoNoAsociado.setPuerto(body.getJsonObject("dispositivo").getInteger("puerto"));
         boolean exists = dispositivoNoAsociadoList.stream()
-            .anyMatch(disp -> disp.getMac().equals(body.getJsonObject("dispositivo").getString("mac")));
+            .anyMatch(disp -> disp.getMac().equals(body.getJsonObject("dispositivo").getString("uuid")));
         try{
             if(!exists) {
                 dispositivoNoAsociadoService.save(dispositivoNoAsociado);
@@ -69,6 +77,18 @@ public class DiscoveryService {
         }catch (Exception ex){
             ex.printStackTrace();
             log.error("Error al guardar dto");
+        }
+    }
+
+    public void sendConfig(String config, String ip, Integer puerto){
+        try {
+            byte[] buff = config.getBytes(Charset.defaultCharset());
+            InetAddress address = InetAddress.getByAddress(ip.getBytes(Charset.defaultCharset()));
+            DatagramSocket socket = new DatagramSocket(puerto);
+            java.net.DatagramPacket packet = new java.net.DatagramPacket(buff, buff.length,address,puerto);
+            socket.send(packet);
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 
