@@ -16,7 +16,7 @@
 logging:
     level:
         ROOT: INFO
-        com.shaffiro: INFO
+        com.shaffiro: DEBUG
         io.github.jhipster: INFO
 
 eureka:
@@ -58,7 +58,7 @@ spring:
             hibernate.cache.region.factory_class: io.github.jhipster.config.jcache.BeanClassLoaderAwareJCacheRegionFactory
     liquibase:
         contexts: prod
-        drop-first: true
+#        drop-first: true
     mail:
         host: smtp.gmail.com
         port: 587
