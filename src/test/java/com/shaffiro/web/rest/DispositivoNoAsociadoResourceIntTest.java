@@ -4,6 +4,7 @@ import com.shaffiro.ShaffiroApp;
 
 import com.shaffiro.domain.DispositivoNoAsociado;
 import com.shaffiro.repository.DispositivoNoAsociadoRepository;
+import com.shaffiro.service.DiscoveryService;
 import com.shaffiro.service.DispositivoNoAsociadoService;
 import com.shaffiro.service.DispositivoService;
 import com.shaffiro.service.dto.DispositivoNoAsociadoDTO;
@@ -79,6 +80,9 @@ public class DispositivoNoAsociadoResourceIntTest {
 
     @Autowired
     private Validator validator;
+
+    @Autowired
+    private DiscoveryService discoveryService;
 
     private MockMvc restDispositivoNoAsociadoMockMvc;
 
