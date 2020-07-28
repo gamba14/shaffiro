@@ -136,13 +136,13 @@ public class DispositivoNoAsociadoResource {
         dispositivoDTO.setConfiguracion(config.getConfiguracion());
         dispositivoDTO.setNombre(config.getNombre());
         dispositivoDTO.setTipo(TipoDispositivo.valueOf(config.getTipo()));
-        dispositivoService.save(dispositivoDTO);
+        dispositivoDTO = dispositivoService.save(dispositivoDTO);
         dispositivoNoAsociadoService.delete(id);
         //enviarle la configuracion.
         DispositivoConfig dispositivoConfig = new DispositivoConfig();
         dispositivoConfig.setNombreDispositivo(config.getNombre());
         dispositivoConfig.setTipoDispositivo(config.getTipo());
-        dispositivoConfig.setTopic("/" + config.getTipo() + "/" + id);
+        dispositivoConfig.setTopic("/" + config.getTipo() + "/" + dispositivoDTO.getId());
         discoveryService.sendConfig(dispositivoConfig,dispositivoNoAsociadoDTO.getUuid(), dispositivoNoAsociadoDTO.getPuerto());
         return ResponseEntity.ok().headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, id.toString())).build();
     }

@@ -5,14 +5,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.shaffiro.domain.DispositivoConfig;
 import com.shaffiro.service.dto.DispositivoNoAsociadoDTO;
-import io.vertx.core.AsyncResult;
-import io.vertx.core.Handler;
-import io.vertx.core.buffer.Buffer;
 import io.vertx.core.datagram.DatagramPacket;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.core.json.JsonObject;
-import io.vertx.core.net.SocketAddress;
-import io.vertx.core.streams.WriteStream;
 import io.vertx.ext.web.RoutingContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +16,6 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,7 +48,7 @@ public class DiscoveryService {
         dispositivoNoAsociado.setUuid(body.getJsonObject("dispositivo").getString("uuid"));
         dispositivoNoAsociado.setPuerto(body.getJsonObject("dispositivo").getInteger("puerto"));
         boolean exists = dispositivoNoAsociadoList.stream()
-            .anyMatch(disp -> disp.getMac().equals(body.getJsonObject("dispositivo").getString("uuid")));
+            .anyMatch(disp -> disp.getMac().equals(body.getJsonObject("dispositivo").getString("mac")));
         try{
             if(!exists) {
                 dispositivoNoAsociadoService.save(dispositivoNoAsociado);
@@ -82,7 +76,7 @@ public class DiscoveryService {
         //dispositivoNoAsociado.setUuid(body.getJsonObject("dispositivo").getString("uuid"));
         dispositivoNoAsociado.setUuid(ip);
         boolean exists = dispositivoNoAsociadoList.stream()
-            .anyMatch(disp -> disp.getMac().equals(body.getJsonObject("dispositivo").getString("uuid")));
+            .anyMatch(disp -> disp.getMac().equals(body.getJsonObject("dispositivo").getString("mac")));
         try{
             if(!exists) dispositivoNoAsociadoService.save(dispositivoNoAsociado);
         }catch (Exception ex){
