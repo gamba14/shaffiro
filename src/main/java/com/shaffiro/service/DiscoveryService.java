@@ -83,7 +83,8 @@ public class DiscoveryService {
     public void sendConfig(String config, String ip, Integer puerto){
         try {
             byte[] buff = config.getBytes(Charset.defaultCharset());
-            InetAddress address = InetAddress.getByAddress(ip.getBytes(Charset.defaultCharset()));
+            log.debug("IP TO SEND CONFIG: {}", ip);
+            InetAddress address = InetAddress.getByName(ip);
             DatagramSocket socket = new DatagramSocket(puerto);
             java.net.DatagramPacket packet = new java.net.DatagramPacket(buff, buff.length,address,puerto);
             socket.send(packet);
