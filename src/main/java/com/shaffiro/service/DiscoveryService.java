@@ -61,6 +61,7 @@ public class DiscoveryService {
     }
 
     public void handleUDP(DatagramPacket socket){
+        dispositivoNoAsociadoList = dispositivoNoAsociadoService.findAll();
         String request = new String(socket.data().getBytes());
         log.debug("Recibo del socket: " + request);
         JsonObject body = new JsonObject(request);
