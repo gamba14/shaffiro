@@ -51,7 +51,7 @@ public class ReglasEngineService {
         // formato del topic /dispositivo/id
         String[] topicParsed = inMsg.topicName().split("/");
         //aca vamos a tener que llamar al motor de reglas.
-        HttpPost post = new HttpPost("http://localhost:5000/ruleEngine/digestor");
+        HttpPost post = new HttpPost("http://docker_rules-engine_1:5000/ruleEngine/digestor");
         StringBuilder json = new StringBuilder();
         json.append("{");
         json.append("\"id\":\"");

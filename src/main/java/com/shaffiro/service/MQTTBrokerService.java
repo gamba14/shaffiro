@@ -1,6 +1,8 @@
 package com.shaffiro.service;
 
 
+import com.shaffiro.service.dto.ProcessValueDTO;
+import io.netty.buffer.ByteBuf;
 import io.netty.handler.codec.mqtt.MqttQoS;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.mqtt.MqttEndpoint;
@@ -22,7 +24,6 @@ public class MQTTBrokerService {
     private static final Logger log = LoggerFactory.getLogger(MQTTBrokerService.class);
     private final ReglasEngineService reglasEngineService;
     private MqttEndpoint endpoint;
-
 
 
     public MQTTBrokerService(ReglasEngineService reglasEngineService) {
@@ -51,13 +52,13 @@ public class MQTTBrokerService {
     }
 
     private void publishAck(Integer integer) {
-        log.debug("ACK for messageID " + integer );
+        log.debug("ACK for messageID " + integer);
     }
 
 
     private void handleSubscription(MqttSubscribeMessage mqttSubscribeMessage) {
         List<MqttQoS> grantedQosLevels = new ArrayList<>();
-        for(MqttTopicSubscription s: mqttSubscribeMessage.topicSubscriptions()){
+        for (MqttTopicSubscription s : mqttSubscribeMessage.topicSubscriptions()) {
             log.debug("Subscription for " + s.topicName() + " with QoS " + s.qualityOfService());
             grantedQosLevels.add(s.qualityOfService());
         }
@@ -66,19 +67,26 @@ public class MQTTBrokerService {
     //publishHandler(this::handle)
 
 
-
     private void handle(MqttPublishMessage message) {
         log.debug("Received message [" + message.payload().toString() + "] from " /*+ message.clientID*/);
 
-        publish(message,reglasEngineService.processMessage(message));
+        publish(message, reglasEngineService.processMessage(message));
 
     }
 
-    private void publish(MqttPublishMessage message, String payload){
+    private void publish(MqttPublishMessage message, String payload) {
 //        log.debug("Recibiendo mensaje de: " + message.topicName());
         log.debug("Contenido: " + message.payload().toString());
         //llamar al motor de reglas
-        endpoint.publish(message.topicName(), Buffer.buffer(payload), MqttQoS.AT_LEAST_ONCE,false,false);
+        endpoint.publish(message.topicName(), Buffer.buffer(payload), MqttQoS.AT_LEAST_ONCE, false, false);
     }
 
+    public void sendMessage(ProcessValueDTO dto) {
+        ByteBuf buff = null;
+        buff.setBytes(0, dto.getAction().getBytes());
+        MqttPublishMessage message = MqttPublishMessage
+            .create(1, MqttQoS.AT_LEAST_ONCE, false, false, "/ACTUADOR/" + dto.getId(), buff);
+        publish(message, dto.getAction());
+
+    }
 }
