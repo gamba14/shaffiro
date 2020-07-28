@@ -1,5 +1,6 @@
 package com.shaffiro.web.rest;
 import com.shaffiro.domain.Config;
+import com.shaffiro.domain.enumeration.TipoDispositivo;
 import com.shaffiro.service.DispositivoNoAsociadoService;
 import com.shaffiro.service.DispositivoService;
 import com.shaffiro.service.dto.DispositivoDTO;
@@ -130,6 +131,7 @@ public class DispositivoNoAsociadoResource {
         dispositivoDTO.setPuerto(dispositivoNoAsociadoDTO.getPuerto());
         dispositivoDTO.setConfiguracion(config.getConfiguracion());
         dispositivoDTO.setNombre(config.getNombre());
+        dispositivoDTO.setTipo(TipoDispositivo.valueOf(config.getTipo()));
         dispositivoService.save(dispositivoDTO);
         dispositivoNoAsociadoService.delete(id);
         //enviarle la configuracion.

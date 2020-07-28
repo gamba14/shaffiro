@@ -6,6 +6,7 @@ package com.shaffiro.domain;
 public class Config {
     private String nombre;
     private String configuracion;
+    private String tipo;
 
     public String getNombre() {
         return nombre;
@@ -21,5 +22,13 @@ public class Config {
 
     public void setConfiguracion(String configuracion) {
         this.configuracion = configuracion;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 }
