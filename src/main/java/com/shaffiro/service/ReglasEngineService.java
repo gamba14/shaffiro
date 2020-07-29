@@ -55,7 +55,7 @@ public class ReglasEngineService {
         StringBuilder json = new StringBuilder();
         json.append("{");
         json.append("\"id\":\"");
-        json.append(topicParsed[1] + "\",");
+        json.append(topicParsed[2] + "\",");
         json.append("\"pv\":\"");
         json.append(new String(inMsg.payload().getBytes()) + "\"");
         json.append("}");
