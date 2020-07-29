@@ -26,6 +26,6 @@ public class RulesEngineResource {
 
     @PostMapping("/receiveAction")
     public void receiveAction(@Valid @RequestBody ProcessValueDTO pvDTO) throws URISyntaxException {
-
+        brokerService.sendMessage(pvDTO);
     }
 }
