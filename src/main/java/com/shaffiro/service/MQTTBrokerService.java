@@ -82,11 +82,6 @@ public class MQTTBrokerService {
     }
 
     public void sendMessage(ProcessValueDTO dto) {
-        /*ByteBuf buff = null;
-        buff.setBytes(0, dto.getAction().getBytes());*/
-        MqttPublishMessage message = MqttPublishMessage
-            .create(1, MqttQoS.AT_LEAST_ONCE, false, false, "/ACTUADOR/" + dto.getId(), null);
-        publish(message, dto.getAction());
-
+        endpoint.publish("/ACTUADOR/" + dto.getId() , Buffer.buffer(dto.getAction()), MqttQoS.AT_LEAST_ONCE, false, false);
     }
 }
