@@ -24,4 +24,12 @@ public class ProcessValueDTO implements Serializable {
     public void setId(String id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "ProcessValueDTO{" +
+            "action='" + action + '\'' +
+            ", id='" + id + '\'' +
+            '}';
+    }
 }
