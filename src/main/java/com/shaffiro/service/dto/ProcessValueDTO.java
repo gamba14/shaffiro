@@ -1,6 +1,7 @@
 package com.shaffiro.service.dto;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * @author Agustin Gambirassi
@@ -31,5 +32,19 @@ public class ProcessValueDTO implements Serializable {
             "action='" + action + '\'' +
             ", id='" + id + '\'' +
             '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProcessValueDTO that = (ProcessValueDTO) o;
+        return Objects.equals(action, that.action) &&
+            Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(action, id);
     }
 }

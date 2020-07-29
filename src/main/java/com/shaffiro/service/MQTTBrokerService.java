@@ -70,7 +70,8 @@ public class MQTTBrokerService {
     private void handle(MqttPublishMessage message) {
         log.debug("Received message [" + message.payload().toString() + "] with topic " + message.topicName());
         //modo relay
-        publish(message, reglasEngineService.processMessage(message));
+//        publish(message, reglasEngineService.processMessage(message));
+        reglasEngineService.processMessage(message);
 
     }
 
