@@ -69,7 +69,7 @@ public class MQTTBrokerService {
 
     private void handle(MqttPublishMessage message) {
         log.debug("Received message [" + message.payload().toString() + "] from " /*+ message.clientID*/);
-
+        //modo relay
         publish(message, reglasEngineService.processMessage(message));
 
     }
@@ -77,8 +77,7 @@ public class MQTTBrokerService {
     private void publish(MqttPublishMessage message, String payload) {
 //        log.debug("Recibiendo mensaje de: " + message.topicName());
         log.debug("Contenido: " + message.payload().toString());
-        //llamar al motor de reglas
-        endpoint.publish(message.topicName(), Buffer.buffer(payload), MqttQoS.AT_LEAST_ONCE, false, false);
+        endpoint.publish("/ACTUADOR/5", Buffer.buffer(payload), MqttQoS.AT_LEAST_ONCE, false, false);
     }
 
     public void sendMessage(ProcessValueDTO dto) {

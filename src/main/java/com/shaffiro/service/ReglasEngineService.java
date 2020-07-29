@@ -38,10 +38,10 @@ public class ReglasEngineService {
 
     private final CloseableHttpClient httpClient = HttpClients.createDefault();
 
-    public String processMessage(MqttPublishMessage inMsg)  {
+    public String processMessage(MqttPublishMessage inMsg) {
         try {
             return process(inMsg);
-        }catch (UnsupportedEncodingException ex){
+        } catch (UnsupportedEncodingException ex) {
             log.error(ex.getLocalizedMessage());
             return "fail";
         }
@@ -57,19 +57,18 @@ public class ReglasEngineService {
         json.append("\"id\":\"");
         json.append(topicParsed[1] + "\",");
         json.append("\"pv\":\"");
-        json.append(new String(inMsg.payload().getBytes()) +"\"");
+        json.append(new String(inMsg.payload().getBytes()) + "\"");
         json.append("}");
-
+        log.debug("Se envia al digestor: {}", json.toString());
         post.setEntity(new StringEntity(json.toString()));
 
         try (CloseableHttpClient httpClient = HttpClients.createDefault();
              CloseableHttpResponse response = httpClient.execute(post)) {
-
             log.info(EntityUtils.toString(response.getEntity()));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return "ok";
+        return "{\"id\":\"5\",\"accion\":\"0\"}";
     }
 }
