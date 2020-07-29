@@ -46,15 +46,18 @@ public class MQTTBrokerService {
             mqttEndpoint.publishHandler(this::handle);
             mqttEndpoint.subscribeHandler(this::handleSubscription);
             mqttEndpoint.publishAcknowledgeHandler(this::publishAck);
+            mqttEndpoint.disconnectHandler(this::disconectionHandler);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    private void disconectionHandler(Void unused) {
+    }
+
     private void publishAck(Integer integer) {
         log.debug("ACK for messageID " + integer);
     }
-
 
     private void handleSubscription(MqttSubscribeMessage mqttSubscribeMessage) {
         List<MqttQoS> grantedQosLevels = new ArrayList<>();
@@ -81,7 +84,7 @@ public class MQTTBrokerService {
         endpoint.publish("/ACTUADOR/6", Buffer.buffer("1"), MqttQoS.AT_LEAST_ONCE, false, false);
     }
 
-    public void sendMessage(ProcessValueDTO dto) {
+    public synchronized void sendMessage(ProcessValueDTO dto) {
         log.info("Se va a enviar: " + dto.toString());
         endpoint.publish("/ACTUADOR/" + dto.getId() , Buffer.buffer(dto.getAction()), MqttQoS.AT_MOST_ONCE, false, false);
     }

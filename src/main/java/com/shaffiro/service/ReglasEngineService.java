@@ -47,7 +47,7 @@ public class ReglasEngineService {
         }
     }
 
-    private String process(MqttPublishMessage inMsg) throws UnsupportedEncodingException {
+    private synchronized String process(MqttPublishMessage inMsg) throws UnsupportedEncodingException {
         // formato del topic /dispositivo/id
         String[] topicParsed = inMsg.topicName().split("/");
         //aca vamos a tener que llamar al motor de reglas.
@@ -64,7 +64,7 @@ public class ReglasEngineService {
 
         try (CloseableHttpClient httpClient = HttpClients.createDefault();
              CloseableHttpResponse response = httpClient.execute(post)) {
-            log.info(EntityUtils.toString(response.getEntity()));
+//            log.info(EntityUtils.toString(response.getEntity()));
         } catch (IOException e) {
             e.printStackTrace();
         }
