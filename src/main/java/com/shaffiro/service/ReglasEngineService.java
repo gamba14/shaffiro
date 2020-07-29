@@ -39,16 +39,12 @@ public class ReglasEngineService {
     private final CloseableHttpClient httpClient = HttpClients.createDefault();
 
     public String processMessage(MqttPublishMessage inMsg) {
-        try {
-            return process(inMsg);
-        } catch (UnsupportedEncodingException ex) {
-            log.error(ex.getLocalizedMessage());
-            return "fail";
-        }
+        return process(inMsg);
     }
 
-    private synchronized String process(MqttPublishMessage inMsg) throws UnsupportedEncodingException {
+    private synchronized String process(MqttPublishMessage inMsg) {
         // formato del topic /dispositivo/id
+        CloseableHttpClient httpClient = HttpClients.createDefault();
         String[] topicParsed = inMsg.topicName().split("/");
         //aca vamos a tener que llamar al motor de reglas.
         HttpPost post = new HttpPost("http://docker_rules-engine_1:5000/ruleEngine/digestor");
@@ -60,14 +56,15 @@ public class ReglasEngineService {
         json.append(new String(inMsg.payload().getBytes()) + "\"");
         json.append("}");
         log.debug("Se envia al digestor: {}", json.toString());
-        post.setEntity(new StringEntity(json.toString()));
 
-        try (CloseableHttpClient httpClient = HttpClients.createDefault();
-             CloseableHttpResponse response = httpClient.execute(post)) {
-//            log.info(EntityUtils.toString(response.getEntity()));
+        try {
+            post.setEntity(new StringEntity(json.toString()));
+            httpClient.execute(post);
         } catch (IOException e) {
             e.printStackTrace();
         }
+//            log.info(EntityUtils.toString(response.getEntity()));
+
 
         return "{\"id\":\"5\",\"accion\":\"0\"}";
     }
