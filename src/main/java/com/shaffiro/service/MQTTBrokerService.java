@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,7 +75,11 @@ public class MQTTBrokerService {
         log.debug("Received message [" + message.payload().toString() + "] with topic " + message.topicName());
         //modo relay
 //        publish(message, reglasEngineService.processMessage(message));
-        reglasEngineService.processMessage(message);
+        try {
+            reglasEngineService.processMessage(message);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
